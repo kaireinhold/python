@@ -1,0 +1,1 @@
+If you don't have any files or projects you want to save or push onto Git, use this text file as a way to follow along in the directions
