@@ -35,9 +35,9 @@ if change == "Y" or change == "Yes" or change == "yes" or change == "y":
 
 print("Did you know I have a pet " + userNoun1 + "?")
 print("It likes to run around and play with all of the " + userNounPlural + "!")
-print("One morning, I woke up and he was wearing a " + userNoun2 + " for a hat!")
-print("I especially like to take him to the " + userPlace + ",")
-print("Because he shows off his " + userAdj + " side!")
+print("One morning, I woke up and it was wearing a " + userNoun2 + " for a hat!")
+print("I especially like to take it to the " + userPlace + ",")
+print("Because he shows off its " + userAdj + " side!")
 
 print(" ")
 print("Thank you for playing!")
