@@ -3,7 +3,7 @@ import time
 import rollDice
 
 def new_Character():
-    open(w,"Characters.sql
+    #open(w,"Characters.sql
     name = input("What would you like to call this character? ").strip()
     dict_Name = name.replace(" ", "_")
     print("Opening " + dict_Name + "...")
