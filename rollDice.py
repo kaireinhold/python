@@ -22,9 +22,9 @@ def roll():
     
     """
     
-    dice_chosen = input("What dice would you like to roll? ")
+    dice_chosen = input("What dice would you like to roll? (d[number] ")
     dice_list = dice_chosen.lower().split()
-    an_list = [8, 11, 18]
+    an_list = [8, 11, 18, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89]
     for x in dice_list:
         if "d" not in x:
             raise ValueError("Value must have a 'd' in front to specify that it is a dice")
@@ -35,8 +35,8 @@ def roll():
         roll_output = random.randint(1,roll_num)
         output_str = str(roll_output)
         if roll_output in an_list or str(output_str[0]) == "8":
-            print(x + ": You rolled an " + output_str + "!")
+            print(x + ": You rolled an", output_str + "!")
         else:
-            print(x + ": You rolled a " + output_str + "!")
+            print(x + ": You rolled a", output_str + "!")
         time.sleep(1)
-roll()
+        return roll_output
