@@ -8,6 +8,7 @@ import sys
 #makechar = False
 #editchar = False
 #dict_Name = {}
+none = True
 play = False
 rolls = []
 def roll(di=None):
@@ -52,22 +53,28 @@ def roll(di=None):
             print(x + ": You rolled a", output_str + "!")
         #time.sleep(1)
         return rolls.append(roll_output)
+while none == True:
+    while play == False:
+        rolls = []
+        start = input("Start? (y/n) ").lower().strip()
+        if start == "y":
+            play = True
+        else:
+            none = False
+            break
 
-
-start = input("Start? (y/n) ").lower().strip()
-if start == "y":
-    play = True
-else:
-    play = False
-    sys.exit()
-
-while play == True:
+    while play == True:
         roll("d100")
         if rolls[-1] == 1:
             print(rolls)
             print(len(rolls))
-            break
-        #elif rolls[
+            play = False
+            
+        """elif rolls[-1] in rolls[0:-1]:
+            print(rolls)
+            print(len(rolls))
+            play = False"""
+
 #while play == True:
 #    todo = input("""
 #What would you like to do?
