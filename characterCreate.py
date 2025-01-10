@@ -1,9 +1,11 @@
+#SCRAPPED
+
 import random
 import time
 import rollDice
 
+dict_Name = {}
 def new_Character():
-    #open(w,"Characters.sql
     name = input("What would you like to call this character? ").strip()
     dict_Name = name.replace(" ", "_")
     print("Opening " + dict_Name + "...")
@@ -17,7 +19,7 @@ def new_Character():
     return dict_Name
 def edit_Character():
     edit_Q = input("What character would you like to edit? (replace spaces with _) ").lower().strip()
-    
+    print(dict_Name == edit_Q)
     edit_Item = input("""What would you like to edit?
  (N)ame
  (C)lass
@@ -25,3 +27,4 @@ def edit_Character():
  (L)evel
  (E)xit
  """).lower().strip()
+
