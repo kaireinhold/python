@@ -8,30 +8,12 @@ import sys
 #makechar = False
 #editchar = False
 #dict_Name = {}
-none = True
-play = False
+none = 0
+play = 5
 rolls = []
+stats = []
+mods = {}
 def roll(di=None):
-    """
-    Simulate rolling dice with a specified number of sides and display the result.
-
-    Input:
-    - d<number> (str): A string where <number> represents the number of sides on the dice to roll, chosen by the user (e.g., 'd20' for a 20-sided die).
-    
-    Output:
-    - str: A message indicating "Rolling d<number>..." followed by a wait of 1.5 seconds, and then another message displaying the rolled value (e.g., "d<number>: You rolled a <rolled value>!").
-    
-    Behavior:
-    - Prompts the user to input a dice to roll (ie. 'd20' for a 20-sided dice.)
-    - Rolls the specified dice and prints the result.
-    - Waits for 1.5 seconds before displaying the result.
-    - Detects if the rolled number should be preceded by 'an' (for example, 8 or 18) and adjusts the output message accordingly.
-
-    Raises:
-    - ValueError: If the input does not include the 'd' prefix, indicating the dice format.
-        
-    """
-
     if di == None:
         dice_chosen = input("What dice would you like to roll? (d[number] ")
     else:
@@ -53,27 +35,35 @@ def roll(di=None):
             print(x + ": You rolled a", output_str + "!")
         #time.sleep(1)
         return rolls.append(roll_output)
-while none == True:
-    while play == False:
+while none < 6:
+    while play > 4:
         rolls = []
         start = input("Start? (y/n) ").lower().strip()
         if start == "y":
-            play = True
+            play = 4
         else:
             none = False
             break
 
-    while play == True:
-        roll("d100")
+    while play > 0:
+        play -= 1
+        roll("d6")
         if rolls[-1] == 1:
+            rolls.pop()
+            play += 1
+        elif len(rolls) == 4:
             print(rolls)
-            print(len(rolls))
-            play = False
-            
-        """elif rolls[-1] in rolls[0:-1]:
-            print(rolls)
-            print(len(rolls))
-            play = False"""
+            rolls.remove(min(rolls))
+            stats.append(sum(rolls))
+            print(sum(rolls))
+            mods[stats[-1]] = (stats[-1] - 10)//2
+            rolls = []
+            none += 1
+            if none >= 6:
+                print(stats)
+                print(mods)
+                break
+            play = 5
 
 #while play == True:
 #    todo = input("""
