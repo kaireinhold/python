@@ -1,15 +1,9 @@
-#import rollDice as r
-import characterCreate
 import random
 import time
 import sys
 
-#diceroll = False
-#makechar = False
-#editchar = False
-#dict_Name = {}
-none = 0
-play = 5
+forstats = 0
+rollstats = 5
 rolls = []
 stats = []
 mods = {}
@@ -35,22 +29,22 @@ def roll(di=None):
             print(x + ": You rolled a", output_str + "!")
         #time.sleep(1)
         return rolls.append(roll_output)
-while none < 6:
-    while play > 4:
+while forstats < 6:
+    while rollstats > 4:
         rolls = []
         start = input("Start? (y/n) ").lower().strip()
         if start == "y":
-            play = 4
+            rollstats = 4
         else:
-            none = False
+            forstats = 0
             break
 
-    while play > 0:
-        play -= 1
+    while rollstats > 0:
+        rollstats -= 1
         roll("d6")
         if rolls[-1] == 1:
             rolls.pop()
-            play += 1
+            rollstats += 1
         elif len(rolls) == 4:
             print(rolls)
             rolls.remove(min(rolls))
@@ -58,47 +52,10 @@ while none < 6:
             print(sum(rolls))
             mods[stats[-1]] = (stats[-1] - 10)//2
             rolls = []
-            none += 1
-            if none >= 6:
+            forstats += 1
+            if forstats >= 6:
                 print(stats)
                 print(mods)
                 break
-            play = 5
-
-#while play == True:
-#    todo = input("""
-#What would you like to do?
-#(R)oll A Dice
-#(M)ake A New Character
-#(E)dit character
-#(N) Exit
-#""").lower().strip()
-#    if todo == "r":
-#        diceroll = True
-#    elif todo == "m":
-#        makechar = True
-#    elif todo == "e":
-#        try:
-#            characterCreate.edit_Character()
-#        except:
-#            print("NameError: You have not made a character yet.")
-#    elif todo == "n":
-#        play = False
-#        time.sleep(0.5)
-#    else:
-#        raise ValueError("Not a valid input")
-#    while diceroll == True:
-#        dice_Q = input("Would you like to roll a dice? (y/n)").lower().strip()
-#        if dice_Q == "y":
-#            r.dice.roll()
-#            time.sleep(1)
-#        elif dice_Q == "n":
-#            time.sleep(1)
-#            diceroll = False
-#    while makechar == True:
-#        characterCreate.new_Character()
-#        makechar = False
-#    while editchar == True:
-#        characterCreate.edit_Character()
-#        editchar = False
-        
+            rollstats = 5
+     
