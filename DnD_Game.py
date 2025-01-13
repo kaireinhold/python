@@ -29,33 +29,40 @@ def roll(di=None):
             print(x + ": You rolled a", output_str + "!")
         #time.sleep(1)
         return rolls.append(roll_output)
-while forstats < 6:
-    while rollstats > 4:
-        rolls = []
-        start = input("Start? (y/n) ").lower().strip()
-        if start == "y":
-            rollstats = 4
-        else:
-            forstats = 0
-            break
 
-    while rollstats > 0:
-        rollstats -= 1
-        roll("d6")
-        if rolls[-1] == 1:
-            rolls.pop()
-            rollstats += 1
-        elif len(rolls) == 4:
-            print(rolls)
-            rolls.remove(min(rolls))
-            stats.append(sum(rolls))
-            print(sum(rolls))
-            mods[stats[-1]] = (stats[-1] - 10)//2
-            rolls = []
-            forstats += 1
-            if forstats >= 6:
-                print(stats)
-                print(mods)
-                break
-            rollstats = 5
+def statrolls():
+    global forstats
+    global rollstats
+    global rolls
+    global stats
+    global mods
+    while forstats < 6:
+        while rollstats > 0:
+            rollstats -= 1
+            roll("d6")
+            if rolls[-1] == 1:
+                rolls.pop()
+                rollstats += 1
+            elif len(rolls) == 4:
+                print(rolls)
+                rolls.remove(min(rolls))
+                stats.append(sum(rolls))
+                print(sum(rolls))
+                mods[stats[-1]] = (stats[-1] - 10)//2
+                rolls = []
+                forstats += 1
+                if forstats >= 6:
+                    print(stats)
+                    print(mods)
+                    break
+                rollstats = 5
      
+while rollstats > 4:
+            rolls = []
+            start = input("Start? (y/n) ").lower().strip()
+            if start == "y":
+                rollstats = 4
+                statrolls()
+            else:
+                forstats = 0
+                break
