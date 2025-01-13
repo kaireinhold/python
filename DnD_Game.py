@@ -30,6 +30,21 @@ def roll(di=None):
         time.sleep(0.5)
         return rolls.append(roll_output)
 
+def roll_no_output(di=None):
+    if di == None:
+        dice_chosen = input("What dice would you like to roll? (d[number] ")
+    else:
+        dice_chosen = di
+    dice_list = dice_chosen.lower().split()
+    an_list = [11, 18,]
+    for x in dice_list:
+        if "d" not in x:
+            raise ValueError("Value must have a 'd' in front to specify that it is a dice")
+        
+        roll_num = int(x[1:len(x)])
+        roll_output = random.randint(1,roll_num)
+        return rolls.append(roll_output)
+
 def stat_roll():
     global for_stats
     global roll_stats
@@ -37,21 +52,17 @@ def stat_roll():
     while for_stats < 6:
         while roll_stats > 0:
             roll_stats -= 1
-            roll("d6")
+            roll_no_output("d6")
             if rolls[-1] == 1:
                 rolls.pop()
                 roll_stats += 1
             elif len(rolls) == 4:
-                print(rolls)
                 rolls.remove(min(rolls))
                 stats.append(sum(rolls))
-                print(sum(rolls))
                 mods[stats[-1]] = (stats[-1] - 10)//2
                 rolls = []
                 for_stats += 1
                 if for_stats >= 6:
-                    print(stats)
-                    print(mods)
                     break
                 roll_stats = 5
      
@@ -81,3 +92,5 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
+
+
