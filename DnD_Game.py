@@ -2,8 +2,8 @@ import random
 import time
 import sys
 
-forstats = 0
-rollstats = 5
+for_stats = 0
+roll_stats = 5
 rolls = []
 stats = []
 mods = {}
@@ -19,7 +19,7 @@ def roll(di=None):
             raise ValueError("Value must have a 'd' in front to specify that it is a dice")
         
         print("Rolling "  + x + "...")
-        #time.sleep(1.5)
+        time.sleep(1)
         roll_num = int(x[1:len(x)])
         roll_output = random.randint(1,roll_num)
         output_str = str(roll_output)
@@ -27,22 +27,20 @@ def roll(di=None):
             print(x + ": You rolled an", output_str + "!")
         else:
             print(x + ": You rolled a", output_str + "!")
-        #time.sleep(1)
+        time.sleep(0.5)
         return rolls.append(roll_output)
 
-def statrolls():
-    global forstats
-    global rollstats
+def stat_roll():
+    global for_stats
+    global roll_stats
     global rolls
-    global stats
-    global mods
-    while forstats < 6:
-        while rollstats > 0:
-            rollstats -= 1
+    while for_stats < 6:
+        while roll_stats > 0:
+            roll_stats -= 1
             roll("d6")
             if rolls[-1] == 1:
                 rolls.pop()
-                rollstats += 1
+                roll_stats += 1
             elif len(rolls) == 4:
                 print(rolls)
                 rolls.remove(min(rolls))
@@ -50,19 +48,36 @@ def statrolls():
                 print(sum(rolls))
                 mods[stats[-1]] = (stats[-1] - 10)//2
                 rolls = []
-                forstats += 1
-                if forstats >= 6:
+                for_stats += 1
+                if for_stats >= 6:
                     print(stats)
                     print(mods)
                     break
-                rollstats = 5
+                roll_stats = 5
      
-while rollstats > 4:
+while roll_stats > 4:
             rolls = []
             start = input("Start? (y/n) ").lower().strip()
             if start == "y":
-                rollstats = 4
-                statrolls()
+                roll_stats = 4
+                stat_roll()
             else:
-                forstats = 0
+                for_stats = 0
                 break
+stat_types = {
+    "Str": stats[0],
+    "Dex": stats[1],
+    "Con": stats[2],
+    "Int": stats[3],
+    "Wis": stats[4],
+    "Cha": stats[5]
+    }
+
+print(f"""Your stats are:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+""")
