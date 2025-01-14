@@ -66,15 +66,6 @@ def stat_roll():
                 if for_stats >= 6:
                     break
                 roll_stats = 5
-        while roll_stats > 4:
-            rolls = []
-            start = input("Start? (y/n) ").lower().strip()
-            if start == "y":
-                roll_stats = 4
-                stat_roll()
-            else:
-                for_stats = 0
-                break
      
 while roll_stats > 4:
             rolls = []
