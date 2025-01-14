@@ -51,6 +51,9 @@ class dice:
             return rolls.append(roll_output)
 
     def roll_no_output(di=None):
+        """
+        To Be Completed
+        """
         if di == None:
             dice_chosen = input("What dice would you like to roll? (d[number] ")
         else:
