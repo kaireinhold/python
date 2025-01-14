@@ -1,3 +1,5 @@
+#Created by Kai Reinhold (kaireinhold on GitHub)
+
 import random
 import time
 import sys
