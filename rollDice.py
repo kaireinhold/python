@@ -49,3 +49,18 @@ class dice:
                 print(x + ": You rolled a", output_str + "!")
             time.sleep(1)
             return rolls.append(roll_output)
+
+    def roll_no_output(di=None):
+        if di == None:
+            dice_chosen = input("What dice would you like to roll? (d[number] ")
+        else:
+            dice_chosen = di
+        dice_list = dice_chosen.lower().split()
+        an_list = [11, 18,]
+        for x in dice_list:
+            if "d" not in x:
+                raise ValueError("Value must have a 'd' in front to specify that it is a dice")
+        
+            roll_num = int(x[1:len(x)])
+            roll_output = random.randint(1,roll_num)
+            return rolls.append(roll_output)
