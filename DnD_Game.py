@@ -72,7 +72,7 @@ def stat_roll(u_class=None):
                 if for_stats >= 6:
                     break
                 roll_stats = 5
-    if u_class == None:
+    if u_class == None or u_class == "":
         stat_types = {
     "Str": stats[0],
     "Dex": stats[1],
