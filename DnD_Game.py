@@ -9,6 +9,7 @@ roll_stats = 5
 rolls = []
 stats = []
 mods = {}
+stat_types = {}
 
 def roll(di=None):
     if di == None:
@@ -48,10 +49,13 @@ def roll_no_output(di=None):
         roll_output = random.randint(1,roll_num)
         return rolls.append(roll_output)
 
-def stat_roll():
+def stat_roll(u_class=None):
     global for_stats
     global roll_stats
     global rolls
+    global stat_types
+    global stats
+    global mods
     while for_stats < 6:
         while roll_stats > 0:
             roll_stats -= 1
@@ -68,18 +72,8 @@ def stat_roll():
                 if for_stats >= 6:
                     break
                 roll_stats = 5
-     
-while roll_stats > 4:
-            rolls = []
-            start = input("Start? (y/n) ").lower().strip()
-            if start == "y":
-                roll_stats = 4
-                stat_roll()
-            else:
-                for_stats = 0
-                break
-
-stat_types = {
+    if u_class == None:
+        stat_types = {
     "Str": stats[0],
     "Dex": stats[1],
     "Con": stats[2],
@@ -87,8 +81,186 @@ stat_types = {
     "Wis": stats[4],
     "Cha": stats[5]
     }
+    else:
+        stats.sort()
+        if u_class.lower() == "barbarian":
+            stat_types = {
+            "Str": stats[5],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[0],
+            "Wis": stats[2],
+            "Cha": stats[1]
+            }
+        elif u_class.lower() == "fighter":
+            stat_types = {
+            "Str": stats[5],
+            "Dex": stats[1],
+            "Con": stats[3],
+            "Int": stats[4],
+            "Wis": stats[0],
+            "Cha": stats[2]
+            }
+        elif u_class.lower() == "wizard":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[4],
+            "Con": stats[3],
+            "Int": stats[5],
+            "Wis": stats[2],
+            "Cha": stats[1]
+            }
+        elif u_class.lower() == "rogue":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[5],
+            "Con": stats[4],
+            "Int": stats[1],
+            "Wis": stats[2],
+            "Cha": stats[3]
+            }
+        elif u_class.lower() == "bard":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[4],
+            "Con": stats[3],
+            "Int": stats[1],
+            "Wis": stats[2],
+            "Cha": stats[5]
+            }
+        elif u_class.lower() == "druid":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[2],
+            "Wis": stats[5],
+            "Cha": stats[1]
+            }
+        elif u_class.lower() == "paladin":
+            stat_types = {
+            "Str": stats[5],
+            "Dex": stats[1],
+            "Con": stats[3],
+            "Int": stats[0],
+            "Wis": stats[2],
+            "Cha": stats[4]
+            }
+        elif u_class.lower() == "cleric":
+            stat_types = {
+            "Str": stats[3],
+            "Dex": stats[2],
+            "Con": stats[4],
+            "Int": stats[1],
+            "Wis": stats[5],
+            "Cha": stats[0]
+            }
+        elif u_class.lower() == "monk":
+            stat_types = {
+            "Str": stats[4],
+            "Dex": stats[2],
+            "Con": stats[3],
+            "Int": stats[1],
+            "Wis": stats[5],
+            "Cha": stats[0]
+            }
+        elif u_class.lower() == "ranger":
+            stat_types = {
+            "Str": stats[5],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[1],
+            "Wis": stats[2],
+            "Cha": stats[0]
+            }
+        elif u_class.lower() == "sorcerer":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[2],
+            "Wis": stats[1],
+            "Cha": stats[5]
+            }
+        elif u_class.lower() == "warlock":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[1],
+            "Wis": stats[2],
+            "Cha": stats[5]
+            }
+        elif u_class.lower() == "artificer":
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[3],
+            "Con": stats[4],
+            "Int": stats[5],
+            "Wis": stats[2],
+            "Cha": stats[1]
+            }
+        elif u_class.lower() == "andrew" or u_class.lower() == "luca" or u_class.lower() == "kai":
+            #easter egg for friends/fellow dms :)
+            stats = [20]
+            mods = {
+                20: 5
+                }
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[0],
+            "Con": stats[0],
+            "Int": stats[0],
+            "Wis": stats[0],
+            "Cha": stats[0]
+            }
+        else:
+            stat_types = {
+            "Str": stats[0],
+            "Dex": stats[1],
+            "Con": stats[2],
+            "Int": stats[3],
+            "Wis": stats[4],
+            "Cha": stats[5]
+            }
 
-print(f"""Your stats are:
+    return stat_types
+     
+while roll_stats > 4:
+            rolls = []
+            start = input("Start? (y/n) ").lower().strip()
+            if start == "y":
+                user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
+                roll_stats = 4
+                stat_roll(user_class)
+            else:
+                for_stats = 0
+                break
+
+if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai":
+    print(f"""You are {user_class}!
+Your stats are:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+""")
+elif user_class.lower() == "artificer":
+    print(f"""You are an {user_class}!
+Your stats are:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+""")
+
+else:
+    print(f"""You are a {user_class}!
+Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
 Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
