@@ -214,15 +214,6 @@ def stat_roll(u_class=None):
             "Wis": stats[0],
             "Cha": stats[0]
             }
-        else:
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[1],
-            "Con": stats[2],
-            "Int": stats[3],
-            "Wis": stats[4],
-            "Cha": stats[5]
-            }
 
     return stat_types
      
@@ -234,8 +225,7 @@ while roll_stats > 4:
                 roll_stats = 4
                 stat_roll(user_class)
             else:
-                for_stats = 0
-                break
+                sys.exit()
 
 if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai":
     print(f"""You are {user_class}!
@@ -250,6 +240,15 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 elif user_class.lower() == "artificer":
     print(f"""You are an {user_class}!
 Your stats are:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+""")
+elif user_class.lower() == "" or user_class == None:
+    print(f"""Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
 Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
