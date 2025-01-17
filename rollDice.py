@@ -24,6 +24,7 @@ class dice:
         - Rolls the specified dice and prints the result.
         - Waits for 1.5 seconds before displaying the result.
         - Detects if the rolled number should be preceded by 'an' (for example, 8 or 18) and adjusts the output message accordingly.
+        - Appends the roll output for each roll to the list named 'rolls'
 
         Raises:
         - ValueError: If the input does not include the 'd' prefix, indicating the dice format.
@@ -54,7 +55,24 @@ class dice:
 
     def roll_no_output(di=None):
         """
-        To Be Completed
+        Simulate rolling dice with a specified number of sides and display the result.
+    
+        Input:
+        - d<number> (str): A string where <number> represents the number of sides on the dice to roll, chosen by the user (e.g., 'd20' for a 20-sided die).
+    
+        Output:
+        - None.
+    
+        Behavior:
+        - Prompts the user to input a dice to roll (ie. 'd20' for a 20-sided dice.)
+        - Rolls the specified dice and prints the result.
+        - Waits for 1.5 seconds before displaying the result.
+        - Detects if the rolled number should be preceded by 'an' (for example, 8 or 18) and adjusts the output message accordingly.
+        - Appends the roll output for each roll to the list named 'rolls'
+
+        Raises:
+        - ValueError: If the input does not include the 'd' prefix, indicating the dice format.
+        
         """
         if di == None:
             dice_chosen = input("What dice would you like to roll? (d[number] ")
