@@ -276,8 +276,3 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
-
-rolls = []
-roll()
-roll_no_output()
-print(rolls)
