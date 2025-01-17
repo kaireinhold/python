@@ -50,7 +50,7 @@ class dice:
             else:
                 print(x + ": You rolled a", output_str + "!")
             time.sleep(1)
-            return rolls.append(roll_output)
+            rolls.append(roll_output)
 
     def roll_no_output(di=None):
         """
@@ -68,4 +68,4 @@ class dice:
         
             roll_num = int(x[1:len(x)])
             roll_output = random.randint(1,roll_num)
-            return rolls.append(roll_output)
+            rolls.append(roll_output)

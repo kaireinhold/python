@@ -32,7 +32,7 @@ def roll(di=None):
         else:
             print(x + ": You rolled a", output_str + "!")
         time.sleep(0.5)
-        return rolls.append(roll_output)
+        rolls.append(roll_output)
 
 def roll_no_output(di=None):
     if di == None:
@@ -47,7 +47,7 @@ def roll_no_output(di=None):
         
         roll_num = int(x[1:len(x)])
         roll_output = random.randint(1,roll_num)
-        return rolls.append(roll_output)
+        rolls.append(roll_output)
 
 def stat_roll(u_class=None):
     global for_stats
@@ -214,6 +214,15 @@ def stat_roll(u_class=None):
             "Wis": stats[0],
             "Cha": stats[0]
             }
+##        elif u_class.lower() == "z" or u_class.lower() == "zurulien":
+##            stat_types = {
+##            "Str": stats[4],
+##            "Dex": stats[0],
+##            "Con": stats[1],
+##            "Int": stats[5],
+##            "Wis": stats[3],
+##            "Cha": stats[2]
+##            }
 
     return stat_types
      
@@ -267,3 +276,8 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
+
+rolls = []
+roll()
+roll_no_output()
+print(rolls)
