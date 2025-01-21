@@ -305,6 +305,9 @@ def stat_increase():
     elif inc_amount == 2:
         stats_to_inc = input("What stats do you want to increase? (Choose 2, separate by a comma: Str, Dex, Con, Int, Wis, Cha) ")
         inc_list = stats_to_inc.split(",")
+        if len(inc_list) > 2:
+            incs = inc_list
+            inc_list = [incs[0], incs[1]]
         for stat in inc_list:
             if stat.lower().strip() == "str":
                 if stat_types["Str"] == 20:
