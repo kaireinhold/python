@@ -10,7 +10,6 @@ rolls = []
 stats = []
 mods = {}
 stat_types = {}
-
 def roll(di=None):
     if di == None:
         dice_chosen = input("What dice would you like to roll? (d[number] ")
@@ -82,8 +81,8 @@ def stat_roll(u_class=None):
         "Cha": stats[5]
         }
     else:
-        stats.sort()
         if u_class.lower() == "barbarian":
+            stats.sort()
             stat_types = {
             "Str": stats[5],
             "Dex": stats[3],
@@ -93,6 +92,7 @@ def stat_roll(u_class=None):
             "Cha": stats[1]
             }
         elif u_class.lower() == "fighter":
+            stats.sort()
             stat_types = {
             "Str": stats[5],
             "Dex": stats[1],
@@ -102,6 +102,7 @@ def stat_roll(u_class=None):
             "Cha": stats[2]
             }
         elif u_class.lower() == "wizard":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[4],
@@ -111,6 +112,7 @@ def stat_roll(u_class=None):
             "Cha": stats[1]
             }
         elif u_class.lower() == "rogue":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[5],
@@ -120,6 +122,7 @@ def stat_roll(u_class=None):
             "Cha": stats[3]
             }
         elif u_class.lower() == "bard":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[4],
@@ -129,6 +132,7 @@ def stat_roll(u_class=None):
             "Cha": stats[5]
             }
         elif u_class.lower() == "druid":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[3],
@@ -138,6 +142,7 @@ def stat_roll(u_class=None):
             "Cha": stats[1]
             }
         elif u_class.lower() == "paladin":
+            stats.sort()
             stat_types = {
             "Str": stats[5],
             "Dex": stats[1],
@@ -147,6 +152,7 @@ def stat_roll(u_class=None):
             "Cha": stats[4]
             }
         elif u_class.lower() == "cleric":
+            stats.sort()
             stat_types = {
             "Str": stats[3],
             "Dex": stats[2],
@@ -156,6 +162,7 @@ def stat_roll(u_class=None):
             "Cha": stats[0]
             }
         elif u_class.lower() == "monk":
+            stats.sort()
             stat_types = {
             "Str": stats[4],
             "Dex": stats[2],
@@ -165,6 +172,7 @@ def stat_roll(u_class=None):
             "Cha": stats[0]
             }
         elif u_class.lower() == "ranger":
+            stats.sort()
             stat_types = {
             "Str": stats[5],
             "Dex": stats[3],
@@ -174,6 +182,7 @@ def stat_roll(u_class=None):
             "Cha": stats[0]
             }
         elif u_class.lower() == "sorcerer":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[3],
@@ -183,6 +192,7 @@ def stat_roll(u_class=None):
             "Cha": stats[5]
             }
         elif u_class.lower() == "warlock":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[3],
@@ -192,6 +202,7 @@ def stat_roll(u_class=None):
             "Cha": stats[5]
             }
         elif u_class.lower() == "artificer":
+            stats.sort()
             stat_types = {
             "Str": stats[0],
             "Dex": stats[3],
@@ -214,15 +225,25 @@ def stat_roll(u_class=None):
             "Wis": stats[0],
             "Cha": stats[0]
             }
-##        elif u_class.lower() == "z" or u_class.lower() == "zurulien":
-##            stat_types = {
-##            "Str": stats[4],
-##            "Dex": stats[0],
-##            "Con": stats[1],
-##            "Int": stats[5],
-##            "Wis": stats[3],
-##            "Cha": stats[2]
-##            }
+        elif u_class.lower() == "z" or u_class.lower() == "zurulien":
+            stats.sort()
+            stat_types = {
+            "Str": stats[4],
+            "Dex": stats[0],
+            "Con": stats[1],
+            "Int": stats[5],
+            "Wis": stats[3],
+            "Cha": stats[2]
+            }
+        else:
+            stat_types = {
+        "Str": stats[0],
+        "Dex": stats[1],
+        "Con": stats[2],
+        "Int": stats[3],
+        "Wis": stats[4],
+        "Cha": stats[5]
+        }
 
     return stat_types
      
@@ -235,6 +256,14 @@ while roll_stats > 4:
                 stat_roll(user_class)
             else:
                 sys.exit()
+ref_stats = {
+        "Str": stats[0],
+        "Dex": stats[1],
+        "Con": stats[2],
+        "Int": stats[3],
+        "Wis": stats[4],
+        "Cha": stats[5]
+        }
 
 if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai":
     print(f"""You are {user_class}!
@@ -246,6 +275,7 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
+    
 elif user_class.lower() == "artificer":
     print(f"""You are an {user_class}!
 Your stats are:
@@ -256,7 +286,8 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
-elif user_class.lower() == "" or user_class == None:
+    
+elif stat_types == ref_stats:
     print(f"""Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -265,7 +296,7 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
-
+    
 else:
     print(f"""You are a {user_class}!
 Your stats are:
