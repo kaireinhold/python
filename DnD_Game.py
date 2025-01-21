@@ -310,32 +310,32 @@ def stat_increase():
                 if stat_types["Str"] == 20:
                     continue
                 else:
-                    stat_types["Str"] += 2
+                    stat_types["Str"] += 1
             elif stat.lower().strip() == "dex":
                 if stat_types["Dex"] == 20:
                     continue
                 else:
-                    stat_types["Dex"] += 2
+                    stat_types["Dex"] += 1
             elif stat.lower().strip() == "con":
                 if stat_types["Con"] == 20:
                     continue
                 else:
-                    stat_types["Con"] += 2
+                    stat_types["Con"] += 1
             elif stat.lower().strip() == "int":
                 if stat_types["Int"] == 20:
                     continue
                 else:
-                    stat_types["Int"] += 2
+                    stat_types["Int"] += 1
             elif stat.lower().strip() == "wis":
                 if stat_types["Wis"] == 20:
                     continue
                 else:
-                    stat_types["Wis"] += 2
+                    stat_types["Wis"] += 1
             elif stat.lower().strip() == "cha":
                 if stat_types["Cha"] == 20:
                     continue
                 else:
-                    stat_types["Cha"] += 2
+                    stat_types["Cha"] += 1
 
     print(stat_types)
 
