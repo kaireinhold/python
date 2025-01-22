@@ -263,8 +263,9 @@ def stat_roll(u_class=None):
         }
     return stat_types
 
-def stat_increase():
-    inc_amount = int(input(""" How do you want to increase your stats?
+def stat_increase(inc_amount = None):
+    if inc_amount == None:
+        inc_amount = int(input(""" How do you want to increase your stats?
 (1) Increase 1 stat by 2 points
 (2) Increase 2 stats by 1 point each
 """))
@@ -367,6 +368,96 @@ def set_level():
         stat_increase()
     return user_level
 
+def set_race():
+    global user_race
+    global movement_speed
+    global darkvision
+    global languages
+    user_race = input("What race is your character? (Dwarf, Half-orc, Elf, Halfling, Human, Dragonborn, Gnome, Half-elf, Tiefling, Aasimar, Changeling, Kenku, Warforged, Arachne, Shifter, Aarakocra, Kobold, Fire Genasi, Air Genasi, Earth Genasi, Water Genasi) ")
+    if user_race.lower().strip() == "dwarf":
+        stat_types["Con"] += 2
+        movement_speed = 25
+        darkvision = True
+        languages = ["Common", "Dwarvish"]
+    elif user_race.lower().strip() == "half-orc":
+        stat_types["Str"] += 2
+        stat_types["Con"] += 1
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Orc"]
+    elif user_race.lower().strip() == "elf":
+        stat_types["Dex"] += 2
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Elven"]
+    elif user_race.lower().strip() == "halfling":
+        stat_types["Dex"] += 2
+        movement_speed = 25
+        darkvision = False
+        languages = ["Common", "Halfling"]
+    elif user_race.lower().strip() == "human":
+        stat_types["Str"] += 1
+        stat_types["Dex"] += 1
+        stat_types["Con"] += 1
+        stat_types["Int"] += 1
+        stat_types["Wis"] += 1
+        stat_types["Cha"] += 1
+        movement_speed = 30
+        darkvision = False
+        languages = ["Common", input("Choose 1 language other than Common: ")]
+    elif user_race.lower().strip() == "dragonborn":
+        stat_types["Str"] += 2
+        stat_types["Cha"] += 1
+        movement_speed = 30
+        darkvision = False
+        languages = ["Common", "Draconic"]
+    elif user_race.lower().strip() == "gnome":
+        stat_types["Int"] += 2
+        movement_speed = 25
+        darkvision = True
+        languages = ["Common", "Gnomish"]
+    elif user_race.lower().strip() == "half-elf":
+        stat_types["Cha"] += 2
+        stat_increase(2)
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Elven", input("Choose 1 language other than Common and Elven: ")]
+    elif user_race.lower().strip() == "tiefling":
+        stat_types["Cha"] += 2
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Infernal"]
+    elif user_race.lower().strip() == "aasimar" or user_race.lower().strip() == "changeling" or user_race.lower().strip() == "kenku" or user_race.lower().strip() == "shifter" or user_race.lower().strip() == "aarakocra" or user_race.lower().strip() == "kobold" or user_race.lower().strip() == "fire genasi" or user_race.lower().strip() == "air genasi" or user_race.lower().strip() == "water genasi" or user_race.lower().strip() == "earth genasi":
+        stat_types[input("Choose 1 score to increase by 1 (Str, Dex, Con, Int, Wis, Cha): ")] += 1
+        inc_2 = int(input("Would you like to increase one score by 2 points (1), or 2 scores by 1 point each (2)? "))
+        if inc_2 == 1:
+            stat_increase(1)
+        elif inc_2 == 2:
+            stat_increase(2)
+        if user_race.lower().strip() == "air genasi":
+            movement_speed = 35
+        else:
+            movement_speed = 30
+        darkvision = True
+        languages = ["Common", input("What language other than Common have you agreed on with your DM? ")]
+    elif user_race.lower().strip() == "warforged":
+        stat_types["Con"] += 2
+        stat_types[input("Choose 1 score to increase by 1 (Str, Dex, Con, Int, Wis, Cha): ")] += 1
+        movement_speed = 30
+        darkvision = False
+        languages = ["Common", input("Choose 1 language other than Common: ")]
+    elif user_race.lower().strip() == "arachne":
+        stat_types["Dex"] += 2
+        stat_types["Wis"] += 1
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Undercommon"]
+    else:
+        movement_speed = 30
+        darkvision = False
+        languages = ["Common"]
+    print(stat_types)
+
 while roll_stats > 4:
             rolls = []
             start = input("Start? (y/n) ").lower().strip()
@@ -374,14 +465,15 @@ while roll_stats > 4:
                 user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
                 roll_stats = 4
                 stat_roll(user_class)
-                print(stats)
                 print(stat_types)
+                set_race()
                 set_level()
             else:
                 sys.exit()
 
 if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai" or user_class.lower() == "z" or user_class.lower() == "zurulien":
-    print(f"""You are {user_class}! Your level is {user_level}!
+    print(f"""You are {user_class}!
+Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -402,7 +494,6 @@ Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
     
-elif user_class == None or user_class == "" or user_class != 'barbarian' or user_class != 'fighter' or user_class != 'wizard' or user_class != 'rogue' or user_class != 'bard' or user_class != 'druid' or user_class != 'paladin' or user_class != 'cleric' or user_class != 'monk' or user_class != 'ranger' or user_class != 'sorcerer' or user_class != 'warlock' or user_class != 'artificer' or user_class != 'andrew' or user_class != 'luca' or user_class != 'kai' or user_class != 'z' or user_class != "zurulien":
     print(f"""Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -423,3 +514,26 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
+
+if user_race.lower().strip() == "aasimar" or user_race.lower().strip() == "air genasi" or user_race.lower().strip() == "arachne" or user_race.lower().strip() == "aarakocra" or user_race.lower().strip() == "earth genasi" or user_race.lower().strip() == "elf":
+    print(f"You are an {user_race}!")
+else:
+    print(f"You are a {user_race}!")
+
+print(f"Your movement speed is {movement_speed}!")
+if darkvision == True:
+    print("You have darkvision!")
+else:
+    None
+print(f"You know these languages:")
+for x in languages:
+      print("-", x)
+
+'''
+TBA:
+Core Bloodling
+Shadeling
+Crystalling
+Silenced
+Starved
+'''
