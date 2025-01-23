@@ -355,7 +355,7 @@ def set_race(race = None):
     if race == None:
         user_race = input("What race is your character? (Dwarf, Half-orc, Elf, Halfling, Human, Dragonborn, Gnome, Half-elf, Tiefling, Aasimar, Changeling, Kenku, Warforged, Arachne, Shifter, Aarakocra, Kobold, Fire Genasi, Air Genasi, Earth Genasi, Water Genasi) ")
     else:
-        user_race = race.strip()
+        user_race = race    
     if user_race.lower().strip() == "dwarf":
         stat_types["Con"] += 2
         movement_speed = 25
@@ -434,11 +434,17 @@ def set_race(race = None):
         movement_speed = 30
         darkvision = True
         languages = ["Common", "Undercommon"]
-    elif user_race.lower().strip() == "starling" or user_race.lower().strip() == "bloodling" or user_race.lower().strip() == "core starling" or user_race.lower().strip() == "shadeling" or user_race.lower().strip() == "crystalling" or user_race.lower().strip() == "symbioling":
-        prev_race = input("What race were you before? ")
-        set_race(prev_race)
+    elif user_race.lower().strip() == "starling" or user_race.lower().strip() == "bloodling" or user_race.lower().strip() == "core starling" or user_race.lower().strip() == "shadeling" or user_race.lower().strip() == "crystalling" or user_race.lower().strip() == "symbioling" or user_race.lower().strip() == "pure starling":
+        current_race = user_race
+        if user_race.lower().strip() != "pure starling":
+            prev_race = input("What race were you before? ")
+            set_race(prev_race)
+            movement_speed += 20
+        else:
+            set_race("human")
+            movement_speed += 25
+        user_race = current_race
         stat_increase(2)
-        movement_speed += 20
         darkvision = True
         languages.append("Sangulect")
     else:
@@ -455,7 +461,10 @@ while roll_stats > 4:
                 roll_stats = 4
                 stat_roll(user_class)
                 print(stat_types)
-                set_race()
+                if user_class.lower().strip() == "z" or user_class.lower().strip() == "zurulien":
+                    set_race("Pure Starling")
+                else:
+                    set_race()
                 set_level()
                 alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")
             else:
@@ -523,12 +532,13 @@ for x in languages:
 
 '''
 TBA:
-Core Starling
-Shadeling
-Crystalling
-Bloodling
-Pure Starling
-Symbioling
+-Core Starling
+-Starling
+-Shadeling
+-Crystalling
+-Bloodling
+-Pure Starling
+-Symbioling
 Silenced
 Starved
 '''
