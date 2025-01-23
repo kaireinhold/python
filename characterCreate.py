@@ -4,7 +4,7 @@
 
 import random
 import time
-import rollDice
+import DnD_function_library
 
 dict_Name = {}
 def new_Character():
