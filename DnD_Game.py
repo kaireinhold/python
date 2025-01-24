@@ -71,175 +71,56 @@ def stat_roll(u_class=None):
                     break
                 roll_stats = 5
     if u_class == None or u_class == "":
-        stat_types = {
-        "Str": stats[0],
-        "Dex": stats[1],
-        "Con": stats[2],
-        "Int": stats[3],
-        "Wis": stats[4],
-        "Cha": stats[5]
-        }
+        stat_types = {"Str": stats[0], "Dex": stats[1], "Con": stats[2], "Int": stats[3], "Wis": stats[4], "Cha": stats[5]}
     else:
         if u_class.lower() == "barbarian":
             stats.sort()
-            stat_types = {
-            "Str": stats[5],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[0],
-            "Wis": stats[2],
-            "Cha": stats[1]
-            }
+            stat_types = {"Str": stats[5], "Dex": stats[3], "Con": stats[4], "Int": stats[0], "Wis": stats[2], "Cha": stats[1]}
         elif u_class.lower() == "fighter":
             stats.sort()
-            stat_types = {
-            "Str": stats[5],
-            "Dex": stats[1],
-            "Con": stats[3],
-            "Int": stats[4],
-            "Wis": stats[0],
-            "Cha": stats[2]
-            }
+            stat_types = {"Str": stats[5], "Dex": stats[1], "Con": stats[3], "Int": stats[4], "Wis": stats[0], "Cha": stats[2]}
         elif u_class.lower() == "wizard":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[4],
-            "Con": stats[3],
-            "Int": stats[5],
-            "Wis": stats[2],
-            "Cha": stats[1]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[4], "Con": stats[3], "Int": stats[5], "Wis": stats[2], "Cha": stats[1]}
         elif u_class.lower() == "rogue":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[5],
-            "Con": stats[4],
-            "Int": stats[1],
-            "Wis": stats[2],
-            "Cha": stats[3]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[5], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[3]}
         elif u_class.lower() == "bard":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[4],
-            "Con": stats[3],
-            "Int": stats[1],
-            "Wis": stats[2],
-            "Cha": stats[5]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[4], "Con": stats[3], "Int": stats[1], "Wis": stats[2], "Cha": stats[5]}
         elif u_class.lower() == "druid":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[2],
-            "Wis": stats[5],
-            "Cha": stats[1]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[2], "Wis": stats[5], "Cha": stats[1]}
         elif u_class.lower() == "paladin":
             stats.sort()
-            stat_types = {
-            "Str": stats[5],
-            "Dex": stats[1],
-            "Con": stats[3],
-            "Int": stats[0],
-            "Wis": stats[2],
-            "Cha": stats[4]
-            }
+            stat_types = {"Str": stats[5], "Dex": stats[1], "Con": stats[3], "Int": stats[0], "Wis": stats[2], "Cha": stats[4]}
         elif u_class.lower() == "cleric":
             stats.sort()
-            stat_types = {
-            "Str": stats[3],
-            "Dex": stats[2],
-            "Con": stats[4],
-            "Int": stats[1],
-            "Wis": stats[5],
-            "Cha": stats[0]
-            }
+            stat_types = {"Str": stats[3], "Dex": stats[2], "Con": stats[4], "Int": stats[1], "Wis": stats[5], "Cha": stats[0]}
         elif u_class.lower() == "monk":
             stats.sort()
-            stat_types = {
-            "Str": stats[4],
-            "Dex": stats[2],
-            "Con": stats[3],
-            "Int": stats[1],
-            "Wis": stats[5],
-            "Cha": stats[0]
-            }
+            stat_types = {"Str": stats[4], "Dex": stats[2], "Con": stats[3], "Int": stats[1], "Wis": stats[5], "Cha": stats[0]}
         elif u_class.lower() == "ranger":
             stats.sort()
-            stat_types = {
-            "Str": stats[5],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[1],
-            "Wis": stats[2],
-            "Cha": stats[0]
-            }
+            stat_types = {"Str": stats[5], "Dex": stats[3], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[0]}
         elif u_class.lower() == "sorcerer":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[2],
-            "Wis": stats[1],
-            "Cha": stats[5]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[2], "Wis": stats[1], "Cha": stats[5]}
         elif u_class.lower() == "warlock":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[1],
-            "Wis": stats[2],
-            "Cha": stats[5]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[5]}
         elif u_class.lower() == "artificer":
             stats.sort()
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[3],
-            "Con": stats[4],
-            "Int": stats[5],
-            "Wis": stats[2],
-            "Cha": stats[1]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[5], "Wis": stats[2], "Cha": stats[1]}
         elif u_class.lower() == "andrew" or u_class.lower() == "luca" or u_class.lower() == "kai":
             #easter egg for friends/fellow dms :)
             stats = [20]
-            stat_types = {
-            "Str": stats[0],
-            "Dex": stats[0],
-            "Con": stats[0],
-            "Int": stats[0],
-            "Wis": stats[0],
-            "Cha": stats[0]
-            }
+            stat_types = {"Str": stats[0], "Dex": stats[0], "Con": stats[0], "Int": stats[0], "Wis": stats[0], "Cha": stats[0]}
         elif u_class.lower() == "z" or u_class.lower() == "zurulien":
             stats.sort()
-            stat_types = {
-            "Str": stats[4],
-            "Dex": stats[0],
-            "Con": stats[1],
-            "Int": stats[5],
-            "Wis": stats[3],
-            "Cha": stats[2]
-            }
+            stat_types = {"Str": stats[4], "Dex": stats[0], "Con": stats[1], "Int": stats[5], "Wis": stats[3], "Cha": stats[2]}
         else:
-            stat_types = {
-        "Str": stats[0],
-        "Dex": stats[1],
-        "Con": stats[2],
-        "Int": stats[3],
-        "Wis": stats[4],
-        "Cha": stats[5]
-        }
+            stat_types = {"Str": stats[0], "Dex": stats[1], "Con": stats[2], "Int": stats[3], "Wis": stats[4], "Cha": stats[5]}
     return stat_types
 
 def stat_increase(inc_amount = None):
@@ -326,23 +207,13 @@ def set_level():
     global user_level
     user_level = int(input("What level is your character? (number) "))
     if user_level >= 19:
-        stat_increase()
-        stat_increase()
-        stat_increase()
-        stat_increase()
-        stat_increase()
+        stat_increase(), stat_increase(), stat_increase(), stat_increase(), stat_increase()
     elif user_level >= 16:
-        stat_increase()
-        stat_increase()
-        stat_increase()
-        stat_increase()
+        stat_increase(), stat_increase(), stat_increase(), stat_increase()
     elif user_level >= 12:
-        stat_increase()
-        stat_increase()
-        stat_increase()
+        stat_increase(), stat_increase(), stat_increase()
     elif user_level >= 8:
-        stat_increase()
-        stat_increase()
+        stat_increase(), stat_increase()
     elif user_level >= 4:
         stat_increase()
     return user_level
