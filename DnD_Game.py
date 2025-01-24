@@ -5,6 +5,15 @@ import time
 import sys
 from DnD_function_library import *
 
+rolls = []
+stats = []
+stat_types = {}
+for_stats = 0
+roll_stats = 5
+user_race = ""
+movement_speed = 30
+darkvision = False
+languages = []
 
 while roll_stats > 4:
             rolls = []
