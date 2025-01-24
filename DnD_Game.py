@@ -253,33 +253,33 @@ def stat_increase(inc_amount = None):
         counter = [1]
         for x in counter:
             if stat_to_inc.lower().strip() == "str":
-                if stat_types["Str"] == 20:
-                    continue
+                if stat_types["Str"] >= 19:
+                    stat_types["Str"] = 20
                 else:
                     stat_types["Str"] += 2
             elif stat_to_inc.lower().strip() == "dex":
-                if stat_types["Dex"] == 20:
-                    continue
+                if stat_types["Dex"] >= 19:
+                    stat_types["Dex"] = 20
                 else:
                     stat_types["Dex"] += 2
             elif stat_to_inc.lower().strip() == "con":
-                if stat_types["Con"] == 20:
-                    continue
+                if stat_types["Con"] >= 19:
+                    stat_types["Con"] = 20
                 else:
                     stat_types["Con"] += 2
             elif stat_to_inc.lower().strip() == "int":
-                if stat_types["Int"] == 20:
-                    continue
+                if stat_types["Int"] >= 19:
+                    stat_types["Int"] = 20
                 else:
                     stat_types["Int"] += 2
             elif stat_to_inc.lower().strip() == "wis":
-                if stat_types["Wis"] == 20:
-                    continue
+                if stat_types["Wis"] >= 19:
+                    stat_types["Wis"] = 20
                 else:
                     stat_types["Wis"] += 2
             elif stat_to_inc.lower().strip() == "cha":
-                if stat_types["Cha"] == 20:
-                    continue
+                if stat_types["Cha"] >= 19:
+                    stat_types["Cha"] = 20
                 else:
                     stat_types["Cha"] += 2
     elif inc_amount == 2:
@@ -290,33 +290,33 @@ def stat_increase(inc_amount = None):
             inc_list = [incs[0], incs[1]]
         for stat in inc_list:
             if stat.lower().strip() == "str":
-                if stat_types["Str"] == 20:
-                    continue
+                if stat_types["Str"] >= 20:
+                    stat_types["Str"] = 20
                 else:
                     stat_types["Str"] += 1
             elif stat.lower().strip() == "dex":
-                if stat_types["Dex"] == 20:
-                    continue
+                if stat_types["Dex"] >= 20:
+                    stat_types["Dex"] = 20
                 else:
                     stat_types["Dex"] += 1
             elif stat.lower().strip() == "con":
-                if stat_types["Con"] == 20:
-                    continue
+                if stat_types["Con"] >= 20:
+                    stat_types["Con"] = 20
                 else:
                     stat_types["Con"] += 1
             elif stat.lower().strip() == "int":
-                if stat_types["Int"] == 20:
-                    continue
+                if stat_types["Int"] >= 20:
+                    stat_types["Int"] = 20
                 else:
                     stat_types["Int"] += 1
             elif stat.lower().strip() == "wis":
-                if stat_types["Wis"] == 20:
-                    continue
+                if stat_types["Wis"] >= 20:
+                    stat_types["Wis"] = 20
                 else:
                     stat_types["Wis"] += 1
             elif stat.lower().strip() == "cha":
-                if stat_types["Cha"] == 20:
-                    continue
+                if stat_types["Cha"] >= 20:
+                    stat_types["Cha"] = 20
                 else:
                     stat_types["Cha"] += 1
 
@@ -439,10 +439,10 @@ def set_race(race = None):
         if user_race.lower().strip() != "pure starling":
             prev_race = input("What race were you before? ")
             set_race(prev_race)
-            movement_speed += 20
+            movement_speed += 10
         else:
             set_race("human")
-            movement_speed += 25
+            movement_speed += 15
         user_race = current_race
         stat_increase(2)
         darkvision = True
