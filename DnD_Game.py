@@ -3,6 +3,10 @@
 import random
 import time
 import sys
+import tkinter as tk
+from tkinter import ttk, messagebox
+import os
+
 
 for_stats = 0
 roll_stats = 5
@@ -328,6 +332,8 @@ while roll_stats > 4:
             rolls = []
             start = input("Start? (y/n) ").lower().strip()
             if start == "y":
+                username = os.getlogin()
+                char_name = input("What is your character's name? ")
                 user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
                 roll_stats = 4
                 stat_roll(user_class)
@@ -340,7 +346,6 @@ while roll_stats > 4:
                 alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")
             else:
                 sys.exit()
-
 if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai" or user_class.lower() == "z" or user_class.lower() == "zurulien":
     print(f"""You are {user_class}!
 Your level is {user_level}!
@@ -376,6 +381,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
     
 else:
+    
     print(f"""You are a {user_class}!
 Your level is {user_level}!
 Your stats are:
@@ -391,15 +397,67 @@ if user_race.lower().strip() == "aasimar" or user_race.lower().strip() == "air g
     print(f"You are an {user_race}!")
 else:
     print(f"You are a {user_race}!")
-
 print(f"Your movement speed is {movement_speed}!")
-if darkvision == True:
-    print("You have darkvision!")
-else:
-    None
-print(f"You know these languages:")
-for x in languages:
-      print("-", x)
+
+
+# Define the absolute path where you want to create the folder
+folder_path = f"C:\\Users\\{username}\\Documents\\character_sheets"  # Change this path as needed
+
+# Check if the folder already exists
+if not os.path.exists(folder_path):
+    # If the folder doesn't exist, create it
+    os.makedirs(folder_path)
+file_name = f"{char_name}_character_sheet.txt"  # Adjust this to your dynamic name
+full_path = os.path.join(folder_path, file_name)
+
+with open(full_path, "a+") as file:
+    file.write(f"""
+Name: {char_name}
+Class: {user_class}
+Race: {user_race}
+Level: {user_level}
+Alignment: {alignment}
+
+Stats:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]}))
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]}))
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]}))
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]}))
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]}))
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]}))
+
+Movement Speed: {movement_speed}
+""")
+
+    if darkvision == True:
+        print("You have darkvision!")
+        file.write("""
+\nDarkvision""")
+    
+    file.write("\nLanguages:\n")
+    print(f"You know these languages:")
+    for x in languages:
+        print("-", x)
+        file.write(f"""- {x}
+\n""")
+
+    messagebox.showinfo("Success", f"Character sheet for {char_name} saved successfully!")
+
+# Move the file pointer to the beginning before reading
+    file.seek(0)
+
+# Read the file contents and print it
+    print(file.read())
+    file_name = f"{char_name}_character_sheet.txt"  # This is the file name or path you used
+    absolute_path = os.path.abspath(file_name)  # Pass the file name (not the file object) here
+    print(f"Absolute path to the file: {absolute_path}")
+
+    file.close()
+
+
+
+
+
 
 '''
 TBA:
