@@ -7,13 +7,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import os
 
-
-for_stats = 0
-roll_stats = 5
-rolls = []
-stats = []
-mods = {1: -5, 2: -4, 3: -4, 4: -3, 5: -3, 6: -2, 7: -2, 8: -1, 9: -1, 10: 0, 11: 0, 12: 1, 13: 1, 14: 2, 15: 2, 16: 3, 17: 3, 18: 4, 19: 4, 20: 5}
-stat_types = {}
 def roll(di=None):
     if di == None:
         dice_chosen = input("What dice would you like to roll? (d[number] ")
@@ -59,6 +52,12 @@ def stat_roll(u_class=None):
     global stat_types
     global stats
     global mods
+    for_stats = 0
+    roll_stats = 5
+    rolls = []
+    stats = []
+    mods = {1: -5, 2: -4, 3: -4, 4: -3, 5: -3, 6: -2, 7: -2, 8: -1, 9: -1, 10: 0, 11: 0, 12: 1, 13: 1, 14: 2, 15: 2, 16: 3, 17: 3, 18: 4, 19: 4, 20: 5}
+    stat_types = {}
     while for_stats < 6:
         while roll_stats > 0:
             roll_stats -= 1
@@ -120,6 +119,7 @@ def stat_roll(u_class=None):
             #easter egg for friends/fellow dms :)
             stats = [20]
             stat_types = {"Str": stats[0], "Dex": stats[0], "Con": stats[0], "Int": stats[0], "Wis": stats[0], "Cha": stats[0]}
+            user_class = ""
         elif u_class.lower() == "z" or u_class.lower() == "zurulien":
             stats.sort()
             stat_types = {"Str": stats[4], "Dex": stats[0], "Con": stats[1], "Int": stats[5], "Wis": stats[3], "Cha": stats[2]}
@@ -328,26 +328,29 @@ def set_race(race = None):
         languages = ["Common"]
     print(stat_types)
 
-while roll_stats > 4:
-            rolls = []
-            start = input("Start? (y/n) ").lower().strip()
-            if start == "y":
-                username = os.getlogin()
-                char_name = input("What is your character's name? ")
-                user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
-                roll_stats = 4
-                stat_roll(user_class)
-                print(stat_types)
-                if user_class.lower().strip() == "z" or user_class.lower().strip() == "zurulien":
-                    set_race("Pure Starling")
-                else:
-                    set_race()
-                set_level()
-                alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")
-            else:
-                sys.exit()
-if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai" or user_class.lower() == "z" or user_class.lower() == "zurulien":
-    print(f"""You are {user_class}!
+while True:
+    rolls = []
+    start = input("Start? (y/n) ").lower().strip()
+    if start == "y":
+        username = os.getlogin()
+        save = input("Would you like to save your character to a text file? (y/n) ")
+        if save.lower().strip() == "y":
+            save_type = input("Would you like to overwrite a file that was already made (or make a new file) (1), or add to a file that was already made (2)? ").lower().strip()
+        char_name = input("What is your character's name? ")
+        user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
+        roll_stats = 4
+        stat_roll(user_class)
+        print(stat_types)
+        if char_name.lower().strip() == "z" or char_name.lower().strip() == "zurulien":
+            set_race("Pure Starling")
+        else:
+            set_race()
+        set_level()
+        alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")
+    else:
+        sys.exit()
+    if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai" or user_class.lower() == "z" or user_class.lower() == "zurulien":
+        print(f"""You are {user_class}!
 Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -358,8 +361,8 @@ Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
     
-elif user_class.lower() == "artificer":
-    print(f"""You are an {user_class}! Your level is {user_level}!
+    elif user_class.lower() == "artificer":
+        print(f"""You are an {user_class}! Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -369,8 +372,8 @@ Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
     
-elif user_class == None or user_class == "" or user_class.lower() != 'barbarian' and user_class.lower() != 'fighter' and user_class.lower() != 'wizard' and user_class.lower() != 'rogue' and user_class.lower() != 'bard' and user_class.lower() != 'druid' and user_class.lower() != 'paladin' and user_class.lower() != 'cleric' and user_class.lower() != 'monk' and user_class.lower() != 'ranger' and user_class.lower() != 'sorcerer' and user_class.lower() != 'warlock' and user_class.lower() != 'artificer':
-    print(f"""Your level is {user_level}!
+    elif user_class == None or user_class == "" or user_class.lower() != 'barbarian' and user_class.lower() != 'fighter' and user_class.lower() != 'wizard' and user_class.lower() != 'rogue' and user_class.lower() != 'bard' and user_class.lower() != 'druid' and user_class.lower() != 'paladin' and user_class.lower() != 'cleric' and user_class.lower() != 'monk' and user_class.lower() != 'ranger' and user_class.lower() != 'sorcerer' and user_class.lower() != 'warlock' and user_class.lower() != 'artificer':
+        print(f"""Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -380,9 +383,8 @@ Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 """)
     
-else:
-    
-    print(f"""You are a {user_class}!
+    else:
+        print(f"""You are a {user_class}!
 Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -391,27 +393,34 @@ Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
 Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
-print(f"Your alignment is {alignment}!")
+    print(f"Your alignment is {alignment}!")
 
-if user_race.lower().strip() == "aasimar" or user_race.lower().strip() == "air genasi" or user_race.lower().strip() == "arachne" or user_race.lower().strip() == "aarakocra" or user_race.lower().strip() == "earth genasi" or user_race.lower().strip() == "elf":
-    print(f"You are an {user_race}!")
-else:
-    print(f"You are a {user_race}!")
-print(f"Your movement speed is {movement_speed}!")
+    if user_race.lower().strip() == "aasimar" or user_race.lower().strip() == "air genasi" or user_race.lower().strip() == "arachne" or user_race.lower().strip() == "aarakocra" or user_race.lower().strip() == "earth genasi" or user_race.lower().strip() == "elf":
+        print(f"You are an {user_race}!")
+    else:
+        print(f"You are a {user_race}!")
+    print(f"Your movement speed is {movement_speed}!")
 
+    if darkvision == True:
+        print("You have darkvision!")
+    print(f"You know these languages:")
+    for x in languages:
+        print("-", x)
 
-# Define the absolute path where you want to create the folder
-folder_path = f"C:\\Users\\{username}\\Documents\\character_sheets"  # Change this path as needed
+    if save.lower().strip() == "y":
+        # Define the absolute path where you want to create the folder
+        folder_path = f"C:\\Users\\{username}\\Documents\\character_sheets"  # Change this path as needed
 
-# Check if the folder already exists
-if not os.path.exists(folder_path):
-    # If the folder doesn't exist, create it
-    os.makedirs(folder_path)
-file_name = f"{char_name}_character_sheet.txt"  # Adjust this to your dynamic name
-full_path = os.path.join(folder_path, file_name)
+        # Check if the folder already exists
+        if not os.path.exists(folder_path):
+            # If the folder doesn't exist, create it
+            os.makedirs(folder_path)
+        file_name = f"{char_name}_character_sheet.txt"  # Adjust this to your dynamic name
+        full_path = os.path.join(folder_path, file_name)
 
-with open(full_path, "a+") as file:
-    file.write(f"""
+        if save_type == "1":
+            with open(full_path, "w+") as file:
+                file.write(f"""
 Name: {char_name}
 Class: {user_class}
 Race: {user_race}
@@ -426,37 +435,76 @@ Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]}))
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]}))
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]}))
 
-Movement Speed: {movement_speed}
-""")
+Movement Speed: {movement_speed}\n""")
 
-    if darkvision == True:
-        print("You have darkvision!")
-        file.write("""
-\nDarkvision""")
+                if darkvision == True:
+                    file.write("""Darkvision\n""")
     
-    file.write("\nLanguages:\n")
-    print(f"You know these languages:")
-    for x in languages:
-        print("-", x)
-        file.write(f"""- {x}
-\n""")
+                file.write("\nLanguages:\n")
+                for x in languages:
+                    file.write(f"- {x}\n")
 
-    messagebox.showinfo("Success", f"Character sheet for {char_name} saved successfully!")
+                # Create a hidden root window
+                root = tk.Tk()
+                root.withdraw()  # Hide the root window
 
-# Move the file pointer to the beginning before reading
-    file.seek(0)
+                # Set the root window as topmost
+                root.attributes('-topmost', True)
 
-# Read the file contents and print it
-    print(file.read())
-    file_name = f"{char_name}_character_sheet.txt"  # This is the file name or path you used
-    absolute_path = os.path.abspath(file_name)  # Pass the file name (not the file object) here
-    print(f"Absolute path to the file: {absolute_path}")
+                # Show the messagebox
+                messagebox.showinfo("Success", f"Character sheet saved to {char_name}_character_sheet.txt!")
 
-    file.close()
+                # Reset the topmost attribute and destroy the root window
+                root.attributes('-topmost', False)
+                root.destroy()
+                file.seek(0) # Move the file pointer to the beginning before reading
+                print(file.read()) # Read the file contents and print it
+                print(f'Absolute path to the file: {full_path}')
+                file.close()
 
+        if save_type == "2":
+            with open(full_path, "a+") as file:
+                file.write(f"""
+Name: {char_name}
+Class: {user_class}
+Race: {user_race}
+Level: {user_level}
+Alignment: {alignment}
 
+Stats:
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]}))
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]}))
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]}))
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]}))
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]}))
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]}))
 
+Movement Speed: {movement_speed}\n""")
 
+                if darkvision == True:
+                    file.write("""Darkvision\n""")
+    
+                file.write("\nLanguages:\n")
+                for x in languages:
+                    file.write(f"- {x}\n")
+
+                # Create a hidden root window
+                root = tk.Tk()
+                root.withdraw()  # Hide the root window
+
+                # Set the root window as topmost
+                root.attributes('-topmost', True)
+
+                # Show the messagebox
+                messagebox.showinfo("Success", f"Character sheet saved to {char_name}_character_sheet.txt!")
+
+                # Reset the topmost attribute and destroy the root window
+                root.attributes('-topmost', False)
+                root.destroy()
+                file.seek(0) # Move the file pointer to the beginning before reading
+                print(file.read()) # Read the file contents and print it
+                print(f'Absolute path to the file: {full_path}')
+                file.close()
 
 
 '''
