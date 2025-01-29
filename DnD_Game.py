@@ -73,7 +73,14 @@ def stat_roll(u_class=None):
                 if for_stats >= 6:
                     break
                 roll_stats = 5
-    if u_class == None or u_class == "":
+    if char_name.lower() == "z" or char_name.lower() == "zurulien":
+        stats.sort()
+        stat_types = {"Str": stats[4], "Dex": stats[0], "Con": stats[1], "Int": stats[5], "Wis": stats[3], "Cha": stats[2]}
+    elif char_name.lower() == "andrew" or char_name.lower() == "luca" or char_name.lower() == "kai":
+        #easter egg for friends/fellow dms :)
+        stats = [20]
+        stat_types = {"Str": stats[0], "Dex": stats[0], "Con": stats[0], "Int": stats[0], "Wis": stats[0], "Cha": stats[0]}
+    elif u_class == None or u_class == "":
         stat_types = {"Str": stats[0], "Dex": stats[1], "Con": stats[2], "Int": stats[3], "Wis": stats[4], "Cha": stats[5]}
     else:
         if u_class.lower() == "barbarian":
@@ -115,14 +122,6 @@ def stat_roll(u_class=None):
         elif u_class.lower() == "artificer":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[5], "Wis": stats[2], "Cha": stats[1]}
-        elif u_class.lower() == "andrew" or u_class.lower() == "luca" or u_class.lower() == "kai":
-            #easter egg for friends/fellow dms :)
-            stats = [20]
-            stat_types = {"Str": stats[0], "Dex": stats[0], "Con": stats[0], "Int": stats[0], "Wis": stats[0], "Cha": stats[0]}
-            user_class = ""
-        elif u_class.lower() == "z" or u_class.lower() == "zurulien":
-            stats.sort()
-            stat_types = {"Str": stats[4], "Dex": stats[0], "Con": stats[1], "Int": stats[5], "Wis": stats[3], "Cha": stats[2]}
         else:
             stat_types = {"Str": stats[0], "Dex": stats[1], "Con": stats[2], "Int": stats[3], "Wis": stats[4], "Cha": stats[5]}
     return stat_types
@@ -336,8 +335,11 @@ while True:
         save = input("Would you like to save your character to a text file? (y/n) ")
         if save.lower().strip() == "y":
             save_type = input("Would you like to overwrite a file that was already made (or make a new file) (1), or add to a file that was already made (2)? ").lower().strip()
-        char_name = input("What is your character's name? ")
-        user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
+        char_name = input("What is your character's name? ").strip()
+        if char_name.lower() != "andrew" and char_name.lower() != "luca" and char_name.lower() != "kai" and char_name.lower() != "z" and char_name.lower() != "zurulien":
+            user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()
+        else:
+            user_class = ""
         roll_stats = 4
         stat_roll(user_class)
         print(stat_types)
@@ -350,8 +352,8 @@ while True:
     else:
         sys.exit()
     if save.lower().strip() == "n":
-        if user_class.lower() == "andrew" or user_class.lower() == "luca" or user_class.lower() == "kai" or user_class.lower() == "z" or user_class.lower() == "zurulien":
-            print(f"""You are {user_class}!
+        if char_name.lower() == "andrew" or char_name.lower() == "luca" or char_name.lower() == "kai" or char_name.lower() == "z" or char_name.lower() == "zurulien":
+            print(f"""You are {char_name}!
 Your level is {user_level}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -429,12 +431,12 @@ Level: {user_level}
 Alignment: {alignment}
 
 Stats:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]}))
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]}))
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]}))
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]}))
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]}))
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]}))
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 
 Movement Speed: {movement_speed}\n""")
 
@@ -473,12 +475,12 @@ Level: {user_level}
 Alignment: {alignment}
 
 Stats:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]}))
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]}))
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]}))
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]}))
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]}))
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]}))
+Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
+Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
+Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
+Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
+Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
+Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
 
 Movement Speed: {movement_speed}\n""")
 
