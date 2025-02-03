@@ -603,8 +603,6 @@ Movement Speed: {movement_speed}\n""")
                 print(f'Absolute path to the file: {full_path}')  # Print the file's absolute path
                 file.close()
 
-
-
 '''
 Features to be added!
 
