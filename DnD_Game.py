@@ -515,6 +515,32 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
             print("-", x)
 
     elif save.lower().strip() == "y":
+
+        divider1 = "\n✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏\n"
+        divider2 = "\n•───────•°•❀•°•───────•\n"
+        divider3 = "\n︵‿︵‿୨♡୧‿︵‿︵\n"
+        divider4 = "\n✿　.　˚　. 　 ˚　✿.\n"
+        divider5 = "\n⊹˚₊‧───────────────‧₊˚⊹\n"
+        divider6 = "\n⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆\n"
+        divider7 = "\n➽───────────────❥\n"
+        divider8 = "\n· • —– ٠ ✤ ٠ —– • ·\n"
+        divider9 = "\n⋅•⋅⋅•⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅∙∘☽༓☾∘∙•⋅⋅⋅•⋅⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅\n"
+        divider10 = "\n•─────⋅☾ ☽⋅─────•\n"
+
+        divider_choice = input("""What divider would you like to use?
+(1) ✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏
+(2) •───────•°•❀•°•───────•
+(3) ︵‿︵‿୨♡୧‿︵‿︵
+(4) ✿　.　˚　. 　 ˚　✿.
+(5) ⊹˚₊‧───────────────‧₊˚⊹
+(6) ⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆ ⋆⁺₊⋆
+(7) ➽───────────────❥
+(8) · • —– ٠ ✤ ٠ —– • ·
+(9) ⋅•⋅⋅•⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅∙∘☽༓☾∘∙•⋅⋅⋅•⋅⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅
+(10) •─────⋅☾ ☽⋅─────•
+(0) None
+""") 
+        
         # Define the absolute path where the character sheet will be saved
         folder_path = f"C:\\Users\\{username}\\Documents\\character_sheets"  # Path where the file will be stored
 
@@ -526,7 +552,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
 
         if save_type == "1":
             # If save_type is 1, overwrite the existing file or create a new one
-            with open(full_path, "w+") as file:
+            with open(full_path, "w+", encoding="utf-8") as file:
                 file.write(f"""
 Name: {char_name}
 Class: {user_class}
@@ -552,6 +578,11 @@ Movement Speed: {movement_speed}\n""")
                 for x in languages:
                     file.write(f"- {x}\n")
 
+                if divider_choice.strip() == "0": #if user inputted '0', no divider.
+                    None
+                else:
+                    file.write(eval(f"divider{divider_choice}")) #write user-chosen divider to file and divider to separate
+                    
                 # Display a success message to the user using tkinter
                 root = tk.Tk()
                 root.withdraw()  # Hide the tkinter root window
@@ -566,7 +597,7 @@ Movement Speed: {movement_speed}\n""")
 
         if save_type == "2":
             # If save_type is 2, append to an existing file
-            with open(full_path, "a+") as file:
+            with open(full_path, "a+", encoding="utf-8") as file:
                 file.write(f"""
 Name: {char_name}
 Class: {user_class}
@@ -590,6 +621,11 @@ Movement Speed: {movement_speed}\n""")
                 file.write("\nLanguages:\n")  # Write the languages known by the character
                 for x in languages:
                     file.write(f"- {x}\n")
+
+                if divider_choice.strip() == "0": #if user inputted '0', no divider.
+                    None
+                else:
+                    file.write(eval(f"divider{divider_choice}")) #write user-chosen divider to file and divider to separate
 
                 # Display a success message to the user using tkinter
                 root = tk.Tk()
