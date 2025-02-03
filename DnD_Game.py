@@ -447,7 +447,7 @@ while True:
         set_level()  # Set the character's level
         alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")  # Get the character's alignment
     else:
-        sys.exit()  # Exit the program if the user doesn't want to start
+        break  # Exit the program if the user doesn't want to start
 
     if save.lower().strip() == "n":
         if char_name.lower() == "andrew" or char_name.lower() == "luca" or char_name.lower() == "kai" or char_name.lower() == "z" or char_name.lower() == "zurulien":
@@ -603,15 +603,31 @@ Movement Speed: {movement_speed}\n""")
                 print(f'Absolute path to the file: {full_path}')  # Print the file's absolute path
                 file.close()
 
+
+
 '''
-TBA:
--Core Starling
--Starling
--Shadeling
--Crystalling
--Bloodling
--Pure Starling
--Symbioling
-Silenced
-Starved
+Features to be added!
+
+TBA races:
+    Goliath
+
+    Homebrew:
+        -Core Starling
+        -Starling
+        -Shadeling
+        -Crystalling
+        -Bloodling
+        -Pure Starling
+        -Symbioling
+        Silenced
+        Starved
+
+
+TBA features (numbers priority/difficulty estimate):
+    Spells (6)
+    Skills (5)
+    Hit points (1)
+    AC (4)
+    Initiative (2-3)
+    Proficiency bonus (2-3)
 '''
