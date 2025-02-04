@@ -10,6 +10,9 @@ import os      # For interacting with the operating system (not used yet)
 
 # Function to simulate rolling dice with output shown
 def roll(di=None):
+    global rolls
+    global roll_output
+    
     # Check if a dice parameter is passed, otherwise ask for user input
     if di == None:
         dice_chosen = input("What dice would you like to roll? (d[number] ")
@@ -52,9 +55,12 @@ def roll(di=None):
 
         # Append the result of the roll to a global list `rolls`
         rolls.append(roll_output)
+    return rolls, roll_output
 
 # Function to simulate rolling dice without displaying the output
 def roll_no_output(di=None):
+    global rolls
+    global roll_output
     # Check if a dice parameter is passed, otherwise ask for user input
     if di == None:
         dice_chosen = input("What dice would you like to roll? (d[number] ")
@@ -81,6 +87,7 @@ def roll_no_output(di=None):
 
         # Append the result of the roll to a global list `rolls`
         rolls.append(roll_output)
+    return rolls, roll_output
 
 
 # Function to simulate rolling stats for a character (ability scores)
@@ -423,7 +430,98 @@ def set_race(race = None):
     # Output the character's stats for verification
     print(stat_types)
 
-
+def calc_hit_points(level=1, u_class=None):
+    global hp_max
+    hp_max = 0
+    
+    if isinstance(u_class, list): #testing if u_class is a list, usage for if user is multiclass.
+        for var in u_class:            
+            if var == None or var == "":
+                hp_max += 8 + mods[stat_types["Con"]]
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d8")
+                    hp_max += rolls[len(rolls)-1]
+            else:
+                if var.lower().strip() == "artificer" or var.lower().strip() == "bard" or var.lower().strip() == "driud" or var.lower().strip() == "cleric" or var.lower().strip() == "monk" or var.lower().strip() == "rogue" or var.lower().strip() == "warlock":
+                    hp_max += 8 + mods[stat_types["Con"]]
+                    if level != 1:
+                        for num in range((level-1)//2):
+                            hp_max += mods[stat_types["Con"]]
+                            roll_no_output("d8")
+                            hp_max += rolls[len(rolls)-1]
+                elif var.lower().strip() == "fighter" or var.lower().strip() == "paladin" or var.lower().strip() == "ranger":
+                    hp_max += 10 + mods[stat_types["Con"]]
+                    if level != 1:
+                        for num in range((level-1)//2):
+                            hp_max += mods[stat_types["Con"]]
+                            roll_no_output("d10")
+                            hp_max += rolls[len(rolls)-1]
+                elif var.lower().strip() == "sorcerer" or var.lower().strip() == "wizard":
+                    hp_max += 6 + mods[stat_types["Con"]]
+                    if level != 1:
+                        for num in range((level-1)//2):
+                            hp_max += mods[stat_types["Con"]]
+                            roll_no_output("d6")
+                            hp_max += rolls[len(rolls)-1]
+                elif var.lower().strip() == "barbarian":
+                    hp_max += 12 + mods[stat_types["Con"]]
+                    if level != 1:
+                        for num in range((level-1)//2):
+                            hp_max += mods[stat_types["Con"]]
+                            roll_no_output("d12")
+                            hp_max += rolls[len(rolls)-1]
+                else:
+                    hp_max += 12 + mods[stat_types["Con"]]
+                    if level != 1:
+                        for num in range((level-1)//2):
+                            hp_max += mods[stat_types["Con"]]
+                            roll_no_output("d8")
+                            hp_max += rolls[len(rolls)-1]
+    elif u_class == None or u_class == "":
+        hp_max += 8 + mods[stat_types["Con"]]
+        for num in range(level-1):
+            hp_max += mods[stat_types["Con"]]
+            roll_no_output("d8")
+            hp_max += rolls[len(rolls)-1]
+    else:
+        if u_class.lower().strip() == "artificer" or u_class.lower().strip() == "bard" or u_class.lower().strip() == "driud" or u_class.lower().strip() == "cleric" or u_class.lower().strip() == "monk" or u_class.lower().strip() == "rogue" or u_class.lower().strip() == "warlock":
+            hp_max += 8 + mods[stat_types["Con"]]
+            if level != 1:
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d8")
+                    hp_max += rolls[len(rolls)-1]
+        elif u_class.lower().strip() == "fighter" or u_class.lower().strip() == "paladin" or u_class.lower().strip() == "ranger":
+            hp_max += 10 + mods[stat_types["Con"]]
+            if level != 1:
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d10")
+                    hp_max += rolls[len(rolls)-1]
+        elif u_class.lower().strip() == "sorcerer" or u_class.lower().strip() == "wizard":
+            hp_max += 6 + mods[stat_types["Con"]]
+            if level != 1:
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d6")
+                    hp_max += rolls[len(rolls)-1]
+        elif u_class.lower().strip() == "barbarian":
+            hp_max += 12 + mods[stat_types["Con"]]
+            if level != 1:
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d12")
+                    hp_max += rolls[len(rolls)-1]
+        else:
+            hp_max += 12 + mods[stat_types["Con"]]
+            if level != 1:
+                for num in range(level-1):
+                    hp_max += mods[stat_types["Con"]]
+                    roll_no_output("d8")
+                    hp_max += rolls[len(rolls)-1]
+    return hp_max
+            
 while True:
     rolls = []  # Initialize a list to store the rolls
     start = input("Start? (y/n) ").lower().strip()  # Ask the user to start the character creation process
@@ -442,9 +540,11 @@ while True:
         print(stat_types)  # Print the rolled stats
         if char_name.lower().strip() == "z" or char_name.lower().strip() == "zurulien":
             set_race("Pure Starling")  # Assign the race "Pure Starling" for specific names
+            user_class = ["barbarian", "wizard"]
         else:
             set_race()  # Set race for other characters
         set_level()  # Set the character's level
+        calc_hit_points(user_level, user_class)
         alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")  # Get the character's alignment
     else:
         break  # Exit the program if the user doesn't want to start
@@ -454,6 +554,7 @@ while True:
             # If character name matches predefined names, print their stats in a specific format
             print(f"""You are {char_name}!
 Your level is {user_level}!
+Your Hit Point Maximum is {hp_max}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -465,7 +566,9 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
     
         elif user_class.lower() == "artificer":
             # Special case for Artificer class, print their stats
-            print(f"""You are an {user_class}! Your level is {user_level}!
+            print(f"""You are an {user_class}!
+Your level is {user_level}!
+Your Hit Point Maximum is {hp_max}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -478,6 +581,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
         elif user_class == None or user_class == "" or user_class.lower() != 'barbarian' and user_class.lower() != 'fighter' and user_class.lower() != 'wizard' and user_class.lower() != 'rogue' and user_class.lower() != 'bard' and user_class.lower() != 'druid' and user_class.lower() != 'paladin' and user_class.lower() != 'cleric' and user_class.lower() != 'monk' and user_class.lower() != 'ranger' and user_class.lower() != 'sorcerer' and user_class.lower() != 'warlock' and user_class.lower() != 'artificer':
             # Print stats for a non-specific class (or undefined class)
             print(f"""Your level is {user_level}!
+Your Hit Point Maximum is {hp_max}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -491,6 +595,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             # General case for valid classes, print their stats
             print(f"""You are a {user_class}!
 Your level is {user_level}!
+Your Hit Point Maximum is {hp_max}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -560,6 +665,8 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
+Hit Point Maximum: {hp_max}
+
 Stats:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -604,6 +711,8 @@ Class: {user_class}
 Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
+
+Hit Point Maximum: {hp_max}
 
 Stats:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
