@@ -426,101 +426,120 @@ def set_race(race = None):
         movement_speed = 30  # Default movement speed
         darkvision = False  # Default: no darkvision
         languages = ["Common"]  # Default language is Common
-    
+        
     # Output the character's stats for verification
     print(stat_types)
 
 def calc_hit_points(level=1, u_class=None):
     global hp_max
-    hp_max = 0
-    
-    if isinstance(u_class, list): #testing if u_class is a list, usage for if user is multiclass.
-        for var in u_class:            
+    hp_max = 0  # Initialize the max HP variable
+    # Check if the user's class is a list (multiclass character)
+    if isinstance(u_class, list): 
+        for var in u_class:  # Iterate through each class in the list
+            # If class is None or empty, assume default hit dice (d8)
             if var == None or var == "":
-                hp_max += 8 + mods[stat_types["Con"]]
-                for num in range(level-1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d8")
-                    hp_max += rolls[len(rolls)-1]
+                hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
+                for num in range(level - 1):  # Roll hit dice for remaining levels
+                    hp_max += mods[stat_types["Con"]]  # Add Constitution modifier
+                    roll_no_output("d8")  # Roll a d8 hit die
+                    hp_max += rolls[len(rolls)-1]  # Add the rolled result
             else:
-                if var.lower().strip() == "artificer" or var.lower().strip() == "bard" or var.lower().strip() == "driud" or var.lower().strip() == "cleric" or var.lower().strip() == "monk" or var.lower().strip() == "rogue" or var.lower().strip() == "warlock":
-                    hp_max += 8 + mods[stat_types["Con"]]
+                # Check if the class belongs to the d8 hit dice group
+                if var.lower().strip() in ["artificer", "bard", "druid", "cleric", "monk", "rogue", "warlock"]:
+                    hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
                     if level != 1:
-                        for num in range((level-1)//2):
+                        for num in range((level - 1) // 2):  # Roll hit dice for remaining levels
                             hp_max += mods[stat_types["Con"]]
-                            roll_no_output("d8")
+                            roll_no_output("d8")  # Roll a d8
                             hp_max += rolls[len(rolls)-1]
-                elif var.lower().strip() == "fighter" or var.lower().strip() == "paladin" or var.lower().strip() == "ranger":
-                    hp_max += 10 + mods[stat_types["Con"]]
+                
+                # Check if the class belongs to the d10 hit dice group
+                elif var.lower().strip() in ["fighter", "paladin", "ranger"]:
+                    hp_max += 10 + mods[stat_types["Con"]]  # Base HP for level 1
                     if level != 1:
-                        for num in range((level-1)//2):
+                        for num in range((level - 1) // 2):
                             hp_max += mods[stat_types["Con"]]
-                            roll_no_output("d10")
+                            roll_no_output("d10")  # Roll a d10
                             hp_max += rolls[len(rolls)-1]
-                elif var.lower().strip() == "sorcerer" or var.lower().strip() == "wizard":
-                    hp_max += 6 + mods[stat_types["Con"]]
+
+                # Check if the class belongs to the d6 hit dice group
+                elif var.lower().strip() in ["sorcerer", "wizard"]:
+                    hp_max += 6 + mods[stat_types["Con"]]  # Base HP for level 1
                     if level != 1:
-                        for num in range((level-1)//2):
+                        for num in range((level - 1) // 2):
                             hp_max += mods[stat_types["Con"]]
-                            roll_no_output("d6")
+                            roll_no_output("d6")  # Roll a d6
                             hp_max += rolls[len(rolls)-1]
+
+                # Check if the class is a Barbarian (d12 hit dice)
                 elif var.lower().strip() == "barbarian":
-                    hp_max += 12 + mods[stat_types["Con"]]
+                    hp_max += 12 + mods[stat_types["Con"]]  # Base HP for level 1
                     if level != 1:
-                        for num in range((level-1)//2):
+                        for num in range((level - 1) // 2):
                             hp_max += mods[stat_types["Con"]]
-                            roll_no_output("d12")
+                            roll_no_output("d12")  # Roll a d12
                             hp_max += rolls[len(rolls)-1]
+
+                # Default case (unknown class), assume d8 hit dice
                 else:
                     hp_max += 12 + mods[stat_types["Con"]]
                     if level != 1:
-                        for num in range((level-1)//2):
+                        for num in range((level - 1) // 2):
                             hp_max += mods[stat_types["Con"]]
-                            roll_no_output("d8")
+                            roll_no_output("d8")  # Roll a d8
                             hp_max += rolls[len(rolls)-1]
+
+    # If the class is None or an empty string (assume default d8 hit dice)
     elif u_class == None or u_class == "":
-        hp_max += 8 + mods[stat_types["Con"]]
-        for num in range(level-1):
+        hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
+        for num in range(level - 1):
             hp_max += mods[stat_types["Con"]]
-            roll_no_output("d8")
+            roll_no_output("d8")  # Roll a d8
             hp_max += rolls[len(rolls)-1]
     else:
-        if u_class.lower().strip() == "artificer" or u_class.lower().strip() == "bard" or u_class.lower().strip() == "driud" or u_class.lower().strip() == "cleric" or u_class.lower().strip() == "monk" or u_class.lower().strip() == "rogue" or u_class.lower().strip() == "warlock":
+        # Check if the class belongs to the d8 hit dice group
+        if u_class.lower().strip() in ["artificer", "bard", "druid", "cleric", "monk", "rogue", "warlock"]:
             hp_max += 8 + mods[stat_types["Con"]]
             if level != 1:
-                for num in range(level-1):
+                for num in range(level - 1):
                     hp_max += mods[stat_types["Con"]]
                     roll_no_output("d8")
                     hp_max += rolls[len(rolls)-1]
-        elif u_class.lower().strip() == "fighter" or u_class.lower().strip() == "paladin" or u_class.lower().strip() == "ranger":
+        # Check if the class belongs to the d10 hit dice group
+        elif u_class.lower().strip() in ["fighter", "paladin", "ranger"]:
             hp_max += 10 + mods[stat_types["Con"]]
             if level != 1:
-                for num in range(level-1):
+                for num in range(level - 1):
                     hp_max += mods[stat_types["Con"]]
                     roll_no_output("d10")
                     hp_max += rolls[len(rolls)-1]
-        elif u_class.lower().strip() == "sorcerer" or u_class.lower().strip() == "wizard":
+        # Check if the class belongs to the d6 hit dice group
+        elif u_class.lower().strip() in ["sorcerer", "wizard"]:
             hp_max += 6 + mods[stat_types["Con"]]
             if level != 1:
-                for num in range(level-1):
+                for num in range(level - 1):
                     hp_max += mods[stat_types["Con"]]
                     roll_no_output("d6")
                     hp_max += rolls[len(rolls)-1]
+        # Check if the class is a Barbarian (d12 hit dice)
         elif u_class.lower().strip() == "barbarian":
             hp_max += 12 + mods[stat_types["Con"]]
             if level != 1:
-                for num in range(level-1):
+                for num in range(level - 1):
                     hp_max += mods[stat_types["Con"]]
                     roll_no_output("d12")
                     hp_max += rolls[len(rolls)-1]
+        # Default case (unknown class), assume d8 hit dice
         else:
             hp_max += 12 + mods[stat_types["Con"]]
             if level != 1:
-                for num in range(level-1):
+                for num in range(level - 1):
                     hp_max += mods[stat_types["Con"]]
                     roll_no_output("d8")
                     hp_max += rolls[len(rolls)-1]
-    return hp_max
+
+    return hp_max  # Return the final calculated max HP
+
             
 while True:
     rolls = []  # Initialize a list to store the rolls
@@ -621,6 +640,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
 
     elif save.lower().strip() == "y":
 
+        # Initialize dividers
         divider1 = "\n✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏\n"
         divider2 = "\n•───────•°•❀•°•───────•\n"
         divider3 = "\n︵‿︵‿୨♡୧‿︵‿︵\n"
@@ -632,6 +652,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
         divider9 = "\n⋅•⋅⋅•⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅∙∘☽༓☾∘∙•⋅⋅⋅•⋅⋅⊰⋅•⋅⋅•⋅⋅•⋅⋅•⋅\n"
         divider10 = "\n•─────⋅☾ ☽⋅─────•\n"
 
+        # Ask user what divider they want to use, if any.
         divider_choice = input("""What divider would you like to use?
 (1) ✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏
 (2) •───────•°•❀•°•───────•
@@ -731,10 +752,10 @@ Movement Speed: {movement_speed}\n""")
                 for x in languages:
                     file.write(f"- {x}\n")
 
-                if divider_choice.strip() == "0": #if user inputted '0', no divider.
+                if divider_choice.strip() == "0": # If user inputted '0', no divider.
                     None
                 else:
-                    file.write(eval(f"divider{divider_choice}")) #write user-chosen divider to file and divider to separate
+                    file.write(eval(f"divider{divider_choice}")) # Write user-chosen divider to file and divider to separate
 
                 # Display a success message to the user using tkinter
                 root = tk.Tk()
@@ -769,7 +790,7 @@ TBA races:
 TBA features (numbers priority/difficulty estimate):
     Spells (6)
     Skills (5)
-    Hit points (1)
+    -Hit points (1)
     AC (4)
     Initiative (2-3)
     Proficiency bonus (2-3)
