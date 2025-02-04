@@ -561,7 +561,7 @@ while True:
         print(stat_types)  # Print the rolled stats
         if char_name.lower().strip() == "z" or char_name.lower().strip() == "zurulien":
             set_race("Pure Starling")  # Assign the race "Pure Starling" for specific names
-            user_class = ["barbarian", "wizard"]
+            user_class = ["Barbarian", "Wizard"]
         else:
             set_race()  # Set race for other characters
         set_level()  # Set the character's level
@@ -805,7 +805,7 @@ TBA races:
         Starved
 
 
-TBA features (numbers priority/difficulty estimate):
+TBA features (numbers = priority/difficulty estimate):
     Spells (3)
     Skills (1)
     AC (2)
