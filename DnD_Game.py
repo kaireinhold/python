@@ -1,12 +1,12 @@
 #Created by Kai Reinhold (kaireinhold on GitHub)
 
 # Importing necessary libraries
-import random  # For generating random numbers (used for dice rolls)
-import time    # For adding delays between actions (simulating rolling time)
-import sys     # Provides access to some variables used by the interpreter (not used yet)
-import tkinter as tk  # Tkinter for creating GUI components (not used in this snippet)
-from tkinter import ttk, messagebox  # Importing specific Tkinter widgets (not used yet)
-import os      # For interacting with the operating system (not used yet)
+import random  # For generating random numbers
+import time    # For adding delays between actions
+import sys     # Provides access to some variables used by the interpreter
+import tkinter as tk  # Tkinter for creating GUI components
+from tkinter import ttk, messagebox  # Importing specific Tkinter widgets
+import os      # For interacting with the operating system
 
 # Function to simulate rolling dice with output shown
 def roll(di=None):
@@ -540,6 +540,8 @@ def calc_hit_points(level=1, u_class=None):
 
     return hp_max  # Return the final calculated max HP
 
+# Initialize dictionary to assign proficiency bonus
+proficiency = {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 4, 12: 4, 13: 5, 14: 5, 15: 5, 16: 5, 17: 6, 18: 6, 19: 6, 20: 6}
             
 while True:
     rolls = []  # Initialize a list to store the rolls
@@ -574,6 +576,8 @@ while True:
             print(f"""You are {char_name}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
+Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -588,6 +592,8 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             print(f"""You are an {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
+Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -601,6 +607,8 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             # Print stats for a non-specific class (or undefined class)
             print(f"""Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
+Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -615,6 +623,8 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             print(f"""You are a {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
+Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
 Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
@@ -686,6 +696,8 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
+Initiative Bonus: {mods[stat_types["Con"]}
+
 Hit Point Maximum: {hp_max}
 
 Stats:
@@ -695,6 +707,8 @@ Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
 Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+
+Proficiency Bonus: {proficiency[user_level]}
 
 Movement Speed: {movement_speed}\n""")
 
@@ -733,6 +747,8 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
+Initiative Bonus: {mods[stat_types["Con"]}
+
 Hit Point Maximum: {hp_max}
 
 Stats:
@@ -742,6 +758,8 @@ Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
 Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
 Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
 Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+
+Proficiency Bonus: {proficiency[user_level]}
 
 Movement Speed: {movement_speed}\n""")
 
@@ -788,9 +806,7 @@ TBA races:
 
 
 TBA features (numbers priority/difficulty estimate):
-    Spells (5)
-    Skills (4)
-    AC (3)
-    Initiative (1-2)
-    Proficiency bonus (1-2)
+    Spells (3)
+    Skills (1)
+    AC (2)
 '''
