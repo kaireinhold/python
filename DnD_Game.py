@@ -788,10 +788,9 @@ TBA races:
 
 
 TBA features (numbers priority/difficulty estimate):
-    Spells (6)
-    Skills (5)
-    -Hit points (1)
-    AC (4)
-    Initiative (2-3)
-    Proficiency bonus (2-3)
+    Spells (5)
+    Skills (4)
+    AC (3)
+    Initiative (1-2)
+    Proficiency bonus (1-2)
 '''
