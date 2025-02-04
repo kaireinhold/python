@@ -576,7 +576,7 @@ while True:
             print(f"""You are {char_name}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Initiative Bonus is {mods[stat_types["Dex"]]}!
 Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -592,7 +592,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             print(f"""You are an {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Initiative Bonus is {mods[stat_types["Dex"]]}!
 Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -607,7 +607,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             # Print stats for a non-specific class (or undefined class)
             print(f"""Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Initiative Bonus is {mods[stat_types["Con"]]}!
 Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -623,7 +623,7 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             print(f"""You are a {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Con"]}!
+Your Initiative Bonus is {mods[stat_types["Dex"]]}!
 Your Proficiency Bonus is {proficiency[user_level]}!
 Your stats are:
 Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
@@ -696,7 +696,7 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
-Initiative Bonus: {mods[stat_types["Con"]}
+Initiative Bonus: {mods[stat_types["Dex"]]}
 
 Hit Point Maximum: {hp_max}
 
@@ -747,7 +747,7 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
-Initiative Bonus: {mods[stat_types["Con"]}
+Initiative Bonus: {mods[stat_types["Dex"]]}
 
 Hit Point Maximum: {hp_max}
 
