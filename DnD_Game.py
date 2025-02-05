@@ -98,14 +98,12 @@ def stat_roll(u_class=None):
     global rolls
     global stat_types
     global stats
-    global mods
-
+    
     # Initialize variables for tracking the number of stats to roll and the rolls
     for_stats = 0
     roll_stats = 5  # 5 rolls per stat
     rolls = []  # List to hold individual roll results
     stats = []  # List to hold the sum of the rolled stats
-    mods = {1: -5, 2: -4, 3: -4, 4: -3, 5: -3, 6: -2, 7: -2, 8: -1, 9: -1, 10: 0, 11: 0, 12: 1, 13: 1, 14: 2, 15: 2, 16: 3, 17: 3, 18: 4, 19: 4, 20: 5}  # Modifiers for ability scores
     stat_types = {}  # Dictionary to store the final ability scores
 
     # Loop to generate the 6 stats (Str, Dex, Con, Int, Wis, Cha)
@@ -142,43 +140,43 @@ def stat_roll(u_class=None):
         stat_types = {"Str": stats[0], "Dex": stats[1], "Con": stats[2], "Int": stats[3], "Wis": stats[4], "Cha": stats[5]}
     else:
         # Assign stats based on the selected class (this part handles class-specific stat priorities)
-        if u_class.lower() == "barbarian":
+        if u_class[0].lower() == "barbarian":
             stats.sort()  # Sort stats in ascending order
             stat_types = {"Str": stats[5], "Dex": stats[3], "Con": stats[4], "Int": stats[0], "Wis": stats[2], "Cha": stats[1]}  # Assign stats based on class
-        elif u_class.lower() == "fighter":
+        elif u_class[0].lower() == "fighter":
             stats.sort()
             stat_types = {"Str": stats[5], "Dex": stats[1], "Con": stats[3], "Int": stats[4], "Wis": stats[0], "Cha": stats[2]}
-        elif u_class.lower() == "wizard":
+        elif u_class[0].lower() == "wizard":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[4], "Con": stats[3], "Int": stats[5], "Wis": stats[2], "Cha": stats[1]}
-        elif u_class.lower() == "rogue":
+        elif u_class[0].lower() == "rogue":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[5], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[3]}
-        elif u_class.lower() == "bard":
+        elif u_class[0].lower() == "bard":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[4], "Con": stats[3], "Int": stats[1], "Wis": stats[2], "Cha": stats[5]}
-        elif u_class.lower() == "druid":
+        elif u_class[0].lower() == "druid":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[2], "Wis": stats[5], "Cha": stats[1]}
-        elif u_class.lower() == "paladin":
+        elif u_class[0].lower() == "paladin":
             stats.sort()
             stat_types = {"Str": stats[5], "Dex": stats[1], "Con": stats[3], "Int": stats[0], "Wis": stats[2], "Cha": stats[4]}
-        elif u_class.lower() == "cleric":
+        elif u_class[0].lower() == "cleric":
             stats.sort()
             stat_types = {"Str": stats[3], "Dex": stats[2], "Con": stats[4], "Int": stats[1], "Wis": stats[5], "Cha": stats[0]}
-        elif u_class.lower() == "monk":
+        elif u_class[0].lower() == "monk":
             stats.sort()
             stat_types = {"Str": stats[4], "Dex": stats[2], "Con": stats[3], "Int": stats[1], "Wis": stats[5], "Cha": stats[0]}
-        elif u_class.lower() == "ranger":
+        elif u_class[0].lower() == "ranger":
             stats.sort()
             stat_types = {"Str": stats[5], "Dex": stats[3], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[0]}
-        elif u_class.lower() == "sorcerer":
+        elif u_class[0].lower() == "sorcerer":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[2], "Wis": stats[1], "Cha": stats[5]}
-        elif u_class.lower() == "warlock":
+        elif u_class[0].lower() == "warlock":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[1], "Wis": stats[2], "Cha": stats[5]}
-        elif u_class.lower() == "artificer":
+        elif u_class[0].lower() == "artificer":
             stats.sort()
             stat_types = {"Str": stats[0], "Dex": stats[3], "Con": stats[4], "Int": stats[5], "Wis": stats[2], "Cha": stats[1]}
         else:
@@ -203,37 +201,19 @@ def stat_increase(inc_amount = None):
         stat_to_inc = input("What stat do you want to increase? (Choose 1: Str, Dex, Con, Int, Wis, Cha) ")
         counter = [1]  # Loop counter, only runs once because we are only increasing one stat
         for x in counter:
-            # Check the stat the user chose and increase it by 2 points, ensuring it doesn't exceed 20
+            # Check the stat the user chose and increase it by 2 points
             if stat_to_inc.lower().strip() == "str":
-                if stat_types["Str"] >= 19:
-                    stat_types["Str"] = 20  # If it's already 19 or above, max out at 20
-                else:
-                    stat_types["Str"] += 2  # Otherwise, increase by 2
+                stat_types["Str"] += 2
             elif stat_to_inc.lower().strip() == "dex":
-                if stat_types["Dex"] >= 19:
-                    stat_types["Dex"] = 20
-                else:
-                    stat_types["Dex"] += 2
+                stat_types["Dex"] += 2
             elif stat_to_inc.lower().strip() == "con":
-                if stat_types["Con"] >= 19:
-                    stat_types["Con"] = 20
-                else:
-                    stat_types["Con"] += 2
+                stat_types["Con"] += 2
             elif stat_to_inc.lower().strip() == "int":
-                if stat_types["Int"] >= 19:
-                    stat_types["Int"] = 20
-                else:
-                    stat_types["Int"] += 2
+                stat_types["Int"] += 2
             elif stat_to_inc.lower().strip() == "wis":
-                if stat_types["Wis"] >= 19:
-                    stat_types["Wis"] = 20
-                else:
-                    stat_types["Wis"] += 2
+                stat_types["Wis"] += 2
             elif stat_to_inc.lower().strip() == "cha":
-                if stat_types["Cha"] >= 19:
-                    stat_types["Cha"] = 20
-                else:
-                    stat_types["Cha"] += 2
+                stat_types["Cha"] += 2
 
     # Case 2: Increase 2 stats by 1 point each
     elif inc_amount == 2:
@@ -245,38 +225,20 @@ def stat_increase(inc_amount = None):
             incs = inc_list
             inc_list = [incs[0], incs[1]]
         
-        # Increase each of the chosen stats by 1 point, ensuring they don't exceed 20
+        # Increase each of the chosen stats by 1 point
         for stat in inc_list:
             if stat.lower().strip() == "str":
-                if stat_types["Str"] >= 20:
-                    stat_types["Str"] = 20
-                else:
-                    stat_types["Str"] += 1
+                stat_types["Str"] += 1
             elif stat.lower().strip() == "dex":
-                if stat_types["Dex"] >= 20:
-                    stat_types["Dex"] = 20
-                else:
-                    stat_types["Dex"] += 1
+                stat_types["Dex"] += 1
             elif stat.lower().strip() == "con":
-                if stat_types["Con"] >= 20:
-                    stat_types["Con"] = 20
-                else:
-                    stat_types["Con"] += 1
+                stat_types["Con"] += 1
             elif stat.lower().strip() == "int":
-                if stat_types["Int"] >= 20:
-                    stat_types["Int"] = 20
-                else:
-                    stat_types["Int"] += 1
+                stat_types["Int"] += 1
             elif stat.lower().strip() == "wis":
-                if stat_types["Wis"] >= 20:
-                    stat_types["Wis"] = 20
-                else:
-                    stat_types["Wis"] += 1
+                stat_types["Wis"] += 1
             elif stat.lower().strip() == "cha":
-                if stat_types["Cha"] >= 20:
-                    stat_types["Cha"] = 20
-                else:
-                    stat_types["Cha"] += 1
+                stat_types["Cha"] += 1
 
     # Print the updated stat values after the increase
     print(stat_types)
@@ -293,6 +255,10 @@ def set_level():
     
     # Apply stat increases based on the user's character level
     # The higher the level, the more stat increases the character gets
+    if user_level > 20:
+        stat_increase(), stat_increase(), stat_increase(), stat_increase()
+        for level in range(19, user_level+1, 4):
+            stat_increase()
     if user_level >= 19:
         # If level is 19 or higher, apply five stat increases
         stat_increase(), stat_increase(), stat_increase(), stat_increase(), stat_increase()
@@ -430,7 +396,7 @@ def set_race(race = None):
     # Output the character's stats for verification
     print(stat_types)
 
-def calc_hit_points(level=1, u_class=None):
+def calc_hit_points(level=1, u_class=None, con_modifier=1):
     global hp_max
     hp_max = 0  # Initialize the max HP variable
     # Check if the user's class is a list (multiclass character)
@@ -438,110 +404,69 @@ def calc_hit_points(level=1, u_class=None):
         for var in u_class:  # Iterate through each class in the list
             # If class is None or empty, assume default hit dice (d8)
             if var == None or var == "":
-                hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
+                hp_max += 8 + con_modifier  # Base HP for level 1
                 for num in range(level - 1):  # Roll hit dice for remaining levels
-                    hp_max += mods[stat_types["Con"]]  # Add Constitution modifier
+                    hp_max += con_modifier  # Add Constitution modifier
                     roll_no_output("d8")  # Roll a d8 hit die
                     hp_max += rolls[len(rolls)-1]  # Add the rolled result
             else:
                 # Check if the class belongs to the d8 hit dice group
                 if var.lower().strip() in ["artificer", "bard", "druid", "cleric", "monk", "rogue", "warlock"]:
-                    hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
+                    hp_max += 8 + con_modifier  # Base HP for level 1
                     if level != 1:
-                        for num in range((level - 1) // 2):  # Roll hit dice for remaining levels
-                            hp_max += mods[stat_types["Con"]]
+                        for num in range((level - 1) // len(u_class)):  # Roll hit dice for remaining levels
+                            hp_max += con_modifier
                             roll_no_output("d8")  # Roll a d8
                             hp_max += rolls[len(rolls)-1]
                 
                 # Check if the class belongs to the d10 hit dice group
                 elif var.lower().strip() in ["fighter", "paladin", "ranger"]:
-                    hp_max += 10 + mods[stat_types["Con"]]  # Base HP for level 1
+                    hp_max += 10 + con_modifier  # Base HP for level 1
                     if level != 1:
-                        for num in range((level - 1) // 2):
-                            hp_max += mods[stat_types["Con"]]
+                        for num in range((level - 1) // len(u_class)):
+                            hp_max += con_modifier
                             roll_no_output("d10")  # Roll a d10
                             hp_max += rolls[len(rolls)-1]
 
                 # Check if the class belongs to the d6 hit dice group
                 elif var.lower().strip() in ["sorcerer", "wizard"]:
-                    hp_max += 6 + mods[stat_types["Con"]]  # Base HP for level 1
+                    hp_max += 6 + con_modifier  # Base HP for level 1
                     if level != 1:
-                        for num in range((level - 1) // 2):
-                            hp_max += mods[stat_types["Con"]]
+                        for num in range((level - 1) // len(u_class)):
+                            hp_max += con_modifier
                             roll_no_output("d6")  # Roll a d6
                             hp_max += rolls[len(rolls)-1]
 
                 # Check if the class is a Barbarian (d12 hit dice)
                 elif var.lower().strip() == "barbarian":
-                    hp_max += 12 + mods[stat_types["Con"]]  # Base HP for level 1
+                    hp_max += 12 + con_modifier  # Base HP for level 1
                     if level != 1:
-                        for num in range((level - 1) // 2):
-                            hp_max += mods[stat_types["Con"]]
+                        for num in range((level - 1) // len(u_class)):
+                            hp_max += con_modifier
                             roll_no_output("d12")  # Roll a d12
                             hp_max += rolls[len(rolls)-1]
 
                 # Default case (unknown class), assume d8 hit dice
                 else:
-                    hp_max += 12 + mods[stat_types["Con"]]
+                    hp_max += 12 + con_modifier
                     if level != 1:
-                        for num in range((level - 1) // 2):
-                            hp_max += mods[stat_types["Con"]]
+                        for num in range((level - 1) // len(u_class)):
+                            hp_max += con_modifier
                             roll_no_output("d8")  # Roll a d8
                             hp_max += rolls[len(rolls)-1]
 
     # If the class is None or an empty string (assume default d8 hit dice)
     elif u_class == None or u_class == "":
-        hp_max += 8 + mods[stat_types["Con"]]  # Base HP for level 1
+        hp_max += 8 + con_modifier  # Base HP for level 1
         for num in range(level - 1):
-            hp_max += mods[stat_types["Con"]]
+            hp_max += con_modifier
             roll_no_output("d8")  # Roll a d8
             hp_max += rolls[len(rolls)-1]
-    else:
-        # Check if the class belongs to the d8 hit dice group
-        if u_class.lower().strip() in ["artificer", "bard", "druid", "cleric", "monk", "rogue", "warlock"]:
-            hp_max += 8 + mods[stat_types["Con"]]
-            if level != 1:
-                for num in range(level - 1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d8")
-                    hp_max += rolls[len(rolls)-1]
-        # Check if the class belongs to the d10 hit dice group
-        elif u_class.lower().strip() in ["fighter", "paladin", "ranger"]:
-            hp_max += 10 + mods[stat_types["Con"]]
-            if level != 1:
-                for num in range(level - 1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d10")
-                    hp_max += rolls[len(rolls)-1]
-        # Check if the class belongs to the d6 hit dice group
-        elif u_class.lower().strip() in ["sorcerer", "wizard"]:
-            hp_max += 6 + mods[stat_types["Con"]]
-            if level != 1:
-                for num in range(level - 1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d6")
-                    hp_max += rolls[len(rolls)-1]
-        # Check if the class is a Barbarian (d12 hit dice)
-        elif u_class.lower().strip() == "barbarian":
-            hp_max += 12 + mods[stat_types["Con"]]
-            if level != 1:
-                for num in range(level - 1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d12")
-                    hp_max += rolls[len(rolls)-1]
-        # Default case (unknown class), assume d8 hit dice
-        else:
-            hp_max += 12 + mods[stat_types["Con"]]
-            if level != 1:
-                for num in range(level - 1):
-                    hp_max += mods[stat_types["Con"]]
-                    roll_no_output("d8")
-                    hp_max += rolls[len(rolls)-1]
 
     return hp_max  # Return the final calculated max HP
 
 # Initialize dictionary to assign proficiency bonus
-proficiency = {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 4, 12: 4, 13: 5, 14: 5, 15: 5, 16: 5, 17: 6, 18: 6, 19: 6, 20: 6}
+proficiency = {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 4, 12: 4, 13: 5, 14: 5, 15: 5, 16: 5}
             
 while True:
     rolls = []  # Initialize a list to store the rolls
@@ -553,7 +478,7 @@ while True:
             save_type = input("Would you like to overwrite a file that was already made (or make a new file) (1), or add to a file that was already made (2)? ").lower().strip()  # Ask how the user wants to save the file
         char_name = input("What is your character's name? ").strip()  # Get the character's name
         if char_name.lower() != "andrew" and char_name.lower() != "luca" and char_name.lower() != "kai" and char_name.lower() != "z" and char_name.lower() != "zurulien":
-            user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer) ").strip()  # Get the character's class
+            user_class = input("What class do you choose? (Barbarian, Fighter, Wizard, Rogue, Bard, Druid, Paladin, Cleric, Monk, Ranger, Sorcerer, Warlock, Artificer. If you choose multiple, it will automatically distribute your levels evenly between them. Separate with a space. Put priority class first.) ").strip().split(" ")  # Get the character's class
         else:
             user_class = ""  # Special case for certain character names, no class assigned
         roll_stats = 4  # Number of dice to roll for stats (could be defined elsewhere)
@@ -566,57 +491,69 @@ while True:
         else:
             set_race()  # Set race for other characters
         set_level()  # Set the character's level
-        calc_hit_points(user_level, user_class)
+
+        mod_str = (stat_types["Str"] - 10) // 2
+        mod_dex = (stat_types["Dex"] - 10) // 2
+        mod_con = (stat_types["Con"] - 10) // 2
+        mod_int = (stat_types["Int"] - 10) // 2
+        mod_wis = (stat_types["Wis"] - 10) // 2
+        mod_cha = (stat_types["Cha"] - 10) // 2
+        
+        calc_hit_points(user_level, user_class, mod_con)
+        if user_level >= 17:
+            proficiency_bonus = 6
+        else:
+            proficiency_bonus = proficiency[user_level]
         alignment = input("What is your alignment? (Chaotic Good, Neutral Good, Lawful Good, Lawful Neutral, True Neutral, Chaotic Neutral, Lawful Evil, Neutral Evil, Chaotic Evil) ")  # Get the character's alignment
+
     else:
         break  # Exit the program if the user doesn't want to start
-
     if save.lower().strip() == "n":
         if char_name.lower() == "andrew" or char_name.lower() == "luca" or char_name.lower() == "kai" or char_name.lower() == "z" or char_name.lower() == "zurulien":
             # If character name matches predefined names, print their stats in a specific format
             print(f"""You are {char_name}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Dex"]]}!
-Your Proficiency Bonus is {proficiency[user_level]}!
+Your Initiative Bonus is {mod_dex}!
+Your Proficiency Bonus is {proficiency_bonus}!
 Your stats are:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
 """)
     
-        elif user_class.lower() == "artificer":
+        elif user_class[0].lower() == "artificer":
             # Special case for Artificer class, print their stats
             print(f"""You are an {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Dex"]]}!
-Your Proficiency Bonus is {proficiency[user_level]}!
+Your Initiative Bonus is {mod_dex}!
+Your Proficiency Bonus is {proficiency_bonus}!
 Your stats are:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
 """)
     
-        elif user_class == None or user_class == "" or user_class.lower() != 'barbarian' and user_class.lower() != 'fighter' and user_class.lower() != 'wizard' and user_class.lower() != 'rogue' and user_class.lower() != 'bard' and user_class.lower() != 'druid' and user_class.lower() != 'paladin' and user_class.lower() != 'cleric' and user_class.lower() != 'monk' and user_class.lower() != 'ranger' and user_class.lower() != 'sorcerer' and user_class.lower() != 'warlock' and user_class.lower() != 'artificer':
+        elif user_class == None or user_class == "" or user_class[0].lower() != 'barbarian' and user_class[0].lower() != 'fighter' and user_class[0].lower() != 'wizard' and user_class[0].lower() != 'rogue' and user_class[0].lower() != 'bard' and user_class[0].lower() != 'druid' and user_class[0].lower() != 'paladin' and user_class[0].lower() != 'cleric' and user_class[0].lower() != 'monk' and user_class[0].lower() != 'ranger' and user_class[0].lower() != 'sorcerer' and user_class[0].lower() != 'warlock' and user_class[0].lower() != 'artificer':
             # Print stats for a non-specific class (or undefined class)
             print(f"""Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Con"]]}!
-Your Proficiency Bonus is {proficiency[user_level]}!
+Your Initiative Bonus is {mod_dex}!
+Your Proficiency Bonus is {proficiency_bonus}!
 Your stats are:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
 """)
     
         else:
@@ -624,15 +561,16 @@ Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
             print(f"""You are a {user_class}!
 Your level is {user_level}!
 Your Hit Point Maximum is {hp_max}!
-Your Initiative Bonus is {mods[stat_types["Dex"]]}!
-Your Proficiency Bonus is {proficiency[user_level]}!
+Your Initiative Bonus is {mod_dex}!
+Your Proficiency Bonus is {proficiency_bonus}!
 Your stats are:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})""")
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
+""")
         print(f"Your alignment is {alignment}!")  # Output the character's alignment
 
         # Print the race and movement speed information
@@ -697,19 +635,19 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
-Initiative Bonus: {mods[stat_types["Dex"]]}
+Initiative Bonus: {mod_dex}
 
 Hit Point Maximum: {hp_max}
 
 Stats:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
 
-Proficiency Bonus: {proficiency[user_level]}
+Proficiency Bonus: {proficiency_bonus}
 
 Movement Speed: {movement_speed}\n""")
 
@@ -748,19 +686,19 @@ Race: {user_race}
 Level: {user_level}
 Alignment: {alignment}
 
-Initiative Bonus: {mods[stat_types["Dex"]]}
+Initiative Bonus: {mod_dex}
 
 Hit Point Maximum: {hp_max}
 
 Stats:
-Strength: {stat_types["Str"]} ({mods[stat_types["Str"]]})
-Dexterity: {stat_types["Dex"]} ({mods[stat_types["Dex"]]})
-Constitution: {stat_types["Con"]} ({mods[stat_types["Con"]]})
-Intelligence: {stat_types["Int"]} ({mods[stat_types["Int"]]})
-Wisdom: {stat_types["Wis"]} ({mods[stat_types["Wis"]]})
-Charisma: {stat_types["Cha"]} ({mods[stat_types["Cha"]]})
+Strength: {stat_types["Str"]} ({mod_str})
+Dexterity: {stat_types["Dex"]} ({mod_dex})
+Constitution: {stat_types["Con"]} ({mod_con})
+Intelligence: {stat_types["Int"]} ({mod_int})
+Wisdom: {stat_types["Wis"]} ({mod_wis})
+Charisma: {stat_types["Cha"]} ({mod_cha})
 
-Proficiency Bonus: {proficiency[user_level]}
+Proficiency Bonus: {proficiency_bonus}
 
 Movement Speed: {movement_speed}\n""")
 
