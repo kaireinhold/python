@@ -562,6 +562,7 @@ while True:
         if char_name.lower().strip() == "z" or char_name.lower().strip() == "zurulien":
             set_race("Pure Starling")  # Assign the race "Pure Starling" for specific names
             user_class = ["Barbarian", "Wizard"]
+            user_race = "Eye of Mind"
         else:
             set_race()  # Set race for other characters
         set_level()  # Set the character's level
