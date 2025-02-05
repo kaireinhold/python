@@ -374,6 +374,12 @@ def set_race(race = None):
         movement_speed = 30  # Arachne have a movement speed of 30
         darkvision = True  # Arachne have darkvision
         languages = ["Common", "Undercommon"]  # Arachne speak Common and Undercommon
+    elif user_race.lower().strip() == "goliath":
+        stat_types["Str"] += 2
+        stat_types["Con"] += 1
+        movement_speed = 30
+        darkvision = True
+        languages = ["Common", "Giant"]
     elif user_race.lower().strip() == "starling" or user_race.lower().strip() == "bloodling" or user_race.lower().strip() == "core starling" or user_race.lower().strip() == "shadeling" or user_race.lower().strip() == "crystalling" or user_race.lower().strip() == "symbioling" or user_race.lower().strip() == "pure starling":
         current_race = user_race  # Store current race to handle complex starling-related logic
         if user_race.lower().strip() != "pure starling":
