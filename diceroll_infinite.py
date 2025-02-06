@@ -1,10 +1,10 @@
 #Created by Kai Reinhold (kaireinhold on GitHub)
 
-import rollDice
-from rollDice import Dice
+import DnD_function_library
+from DnD_function_library import Dnd
 
 # Create an instance of the Dice class
-dice = Dice()
+dice = Dnd()
 
 while True:
     roll_a_dice = input("Would you like to roll a dice? (y/n) ").lower().strip()

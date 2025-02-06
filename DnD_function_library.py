@@ -21,82 +21,116 @@ class Dnd:
 
     # Function to simulate rolling dice with output shown
     def roll(self, di=None):
-        
+        """
+        Simulate rolling dice with a specified number of sides and display the result.
     
-        # Check if a dice parameter is passed, otherwise ask for user input
-        if di == None:
-            dice_chosen = input("What dice would you like to roll? (d[number] ")
+        Input:
+        - d<number> (str): A string where <number> represents the number of sides on the dice to roll, chosen by the user (e.g., 'd20' for a 20-sided die).
+    
+        Output:
+        - str: A message indicating "Rolling d<number>..." followed by a wait of 1.5 seconds, and then another message displaying the rolled value (e.g., "d<number>: You rolled a <rolled value>!").
+    
+        Behavior:
+        - Prompts the user to input a dice to roll (ie. 'd20' for a 20-sided dice.)
+        - Rolls the specified dice and prints the result.
+        - Waits for 1 seconds before displaying the result.
+        - Detects if the rolled number should be preceded by 'an' (for example, 8 or 18) and adjusts the output message accordingly.
+        - Appends the roll output for each roll to the list named 'rolls'
+
+        Raises:
+        - ValueError: If the input does not include the 'd' prefix, indicating the dice format.
+        
+        """
+        
+        if di is None:
+            dice_chosen = input("What dice would you like to roll? (d[number]) ")
         else:
             dice_chosen = di
 
-        # Split the input string into individual dice types (e.g., "d6", "d20")
         dice_list = dice_chosen.lower().split()
-
-        # List of "special" dice values to highlight
-        an_list = [11, 18]  # Dice numbers that should get a special message
+        self.rolls = []  # Reset rolls list before each roll
+        an_list = [11, 18]
+        processed_dice = []
     
-        # Loop through each dice type chosen by the user
-        for x in dice_list:
-            # Ensure each dice entry contains the letter 'd' (to denote a dice)
-            if "d" not in x:
+        for dice in dice_list:
+            if "d" not in dice:
                 raise ValueError("Value must have a 'd' in front to specify that it is a dice")
-        
-            # Print the rolling message with a brief delay to simulate a dice roll
-            print("Rolling "  + x + "...")
-            time.sleep(1)
-        
-            # Extract the number of sides on the dice (after the 'd')
-            roll_num = int(x[1:len(x)])
-
-            # Generate a random roll result between 1 and the number of sides
-            self.roll_output = random.randint(1, roll_num)
-        
-            # Convert the roll result to a string for easier manipulation
-            output_str = str(self.roll_output)
-        
-            # If the roll result is in the special list or starts with '8', print a different message
-            if self.roll_output in an_list or str(output_str[0]) == "8":
-                print(x + ": You rolled an", output_str + "!")
+            parts = dice.split("d")
+            if parts[0] == "":  
+                num_rolls = 1
             else:
-                print(x + ": You rolled a", output_str + "!")
-        
-            # Small delay before the next roll to simulate realism
+                num_rolls = int(parts[0])
+            try:
+                die_type = int(parts[1])
+            except ValueError:
+                raise ValueError(f"Invalid dice type in '{dice}'.")
+            for _ in range(num_rolls):
+                processed_dice.append(die_type)
+                
+        for die in processed_dice:
+            print(f"Rolling d{die}...")
+            time.sleep(1)
+            self.roll_output = random.randint(1, die)
+            output_str = str(self.roll_output)
+            if self.roll_output in an_list or output_str.startswith("8"):
+                print(f"d{die}: You rolled an {output_str}!")
+            else:
+                print(f"d{die}: You rolled a {output_str}!")
+
             time.sleep(0.5)
+            self.rolls.append(self.roll_output)  # Add roll to instance list
 
-            # Append the result of the roll to a global list `rolls`
-            self.rolls.append(self.roll_output)
-        return self.rolls, self.roll_output
-
-    # Function to simulate rolling dice without displaying the output
+        return self.rolls, self.roll_output  # Return the rolls for the current instance
+    
     def roll_no_output(self, di=None):
+        """
+        Simulate rolling dice with a specified number of sides and display the result.
+    
+        Input:
+        - d<number> (str): A string where <number> represents the number of sides on the dice to roll, chosen by the user (e.g., 'd20' for a 20-sided die).
+    
+        Output:
+        - None.
+    
+        Behavior:
+        - Prompts the user to input a dice to roll (ie. 'd20' for a 20-sided dice.)
+        - Rolls the specified dice and prints the result.
+        - Appends the roll output for each roll to the list named 'rolls'
+
+        Raises:
+        - ValueError: If the input does not include the 'd' prefix, indicating the dice format.
         
-        # Check if a dice parameter is passed, otherwise ask for user input
-        if di == None:
-            dice_chosen = input("What dice would you like to roll? (d[number] ")
+        """
+        
+        if di is None:
+            dice_chosen = input("What dice would you like to roll? (d[number]) ")
         else:
             dice_chosen = di
 
-        # Split the input string into individual dice types (e.g., "d6", "d20")
         dice_list = dice_chosen.lower().split()
-
-        # List of "special" dice values to highlight (though not used here)
-        an_list = [11, 18,]
-
-        # Loop through each dice type chosen by the user
-        for x in dice_list:
-            # Ensure each dice entry contains the letter 'd' (to denote a dice)
-            if "d" not in x:
+        self.rolls = []  # Reset rolls list before each roll
+        processed_dice = []
+    
+        for dice in dice_list:
+            if "d" not in dice:
                 raise ValueError("Value must have a 'd' in front to specify that it is a dice")
-        
-            # Extract the number of sides on the dice (after the 'd')
-            roll_num = int(x[1:len(x)])
+            parts = dice.split("d")
+            if parts[0] == "":  
+                num_rolls = 1
+            else:
+                num_rolls = int(parts[0])
+            try:
+                die_type = int(parts[1])
+            except ValueError:
+                raise ValueError(f"Invalid dice type in '{dice}'.")
+            for _ in range(num_rolls):
+                processed_dice.append(die_type)
+                
+        for die in processed_dice:
+            self.roll_output = random.randint(1, die)
+            self.rolls.append(self.roll_output)  # Add roll to instance list
 
-            # Generate a random roll result between 1 and the number of sides
-            self.roll_output = random.randint(1, roll_num)
-
-            # Append the result of the roll to a global list `rolls`
-            self.rolls.append(self.roll_output)
-        return self.rolls, self.roll_output
+        return self.rolls, self.roll_output  # Return the rolls for the current instance
 
 
     # Function to simulate rolling stats for a character (ability scores)
