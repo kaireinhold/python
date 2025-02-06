@@ -48,7 +48,6 @@ class Dnd:
             dice_chosen = di
 
         dice_list = dice_chosen.lower().split()
-        self.rolls = []  # Reset rolls list before each roll
         an_list = [11, 18]
         processed_dice = []
     
@@ -108,7 +107,6 @@ class Dnd:
             dice_chosen = di
 
         dice_list = dice_chosen.lower().split()
-        self.rolls = []  # Reset rolls list before each roll
         processed_dice = []
     
         for dice in dice_list:
