@@ -294,4 +294,5 @@ TBA features (numbers = priority/difficulty estimate):
     Spells (3)
     Skills (1)
     AC (2)
+    Level up characters without making whole new character sheet instance (4)
 '''
