@@ -18,6 +18,9 @@ class Dnd:
         self.darkvision = False
         self.languages = []
         self.hp_max = 0
+        self.equipment = None
+        self.user_background = None
+        #self.
 
     # Function to simulate rolling dice with output shown
     def roll(self, di=None):
@@ -490,3 +493,10 @@ class Dnd:
                 self.hp_max += self.rolls[len(self.rolls)-1]
 
         return self.hp_max  # Return the final calculated max HP
+
+    def skill_proficiency(self, char_class=None, char_race=None):
+        pass
+    def background(self, char_class=None, char_race=None):
+        pass
+    def give_equipment(self,):
+        pass

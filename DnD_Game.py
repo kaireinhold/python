@@ -13,7 +13,7 @@ from DnD_function_library import Dnd
 dnd = Dnd()
 # Initialize dictionary to assign proficiency bonus
 proficiency = {1: 2, 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 3, 8: 3, 9: 4, 10: 4, 11: 4, 12: 4, 13: 5, 14: 5, 15: 5, 16: 5}
-            
+
 while True:
     dnd.rolls = []  # Initialize a list to store the rolls
     start = input("Start? (y/n) ").lower().strip()  # Ask the user to start the character creation process
@@ -289,8 +289,10 @@ TBA races:
 
 
 TBA features (numbers = priority/difficulty estimate):
-    Spells (3)
-    Skills (1)
-    AC (2)
-    Level up characters without making whole new character sheet instance (4)
+    Spells (5)
+    Skills (4)
+    AC (3)
+    Level up characters without making whole new character sheet instance (6)
+    Background (1)
+    Equipment (2)
 '''
