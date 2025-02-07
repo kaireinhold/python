@@ -276,8 +276,6 @@ Movement Speed: {dnd.movement_speed}\n""")
 Features to be added!
 
 TBA races:
-    Goliath
-
     Homebrew:
         -Core Starling
         -Starling
