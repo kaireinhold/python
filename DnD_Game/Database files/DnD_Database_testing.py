@@ -12,7 +12,7 @@ cursor = conn.cursor()
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS Characters (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
+        name TEXT NOT NULL UNIQUE,
         race TEXT NOT NULL,
         class TEXT NOT NULL,
         background TEXT,
@@ -78,17 +78,27 @@ print("Tables in database:")
 pprint.pprint(tables)
 
 
-def add_character(name, char_class, level):
+def add_character(char_name, char_race, char_class, char_background, char_level):
     conn = sqlite3.connect("DnD_Database.db")
     cursor = conn.cursor()
     
-    cursor.execute("INSERT INTO Characters (name, class, level) VALUES (?, ?, ?)",
-                   (name, char_class, level))
+    # Check if the character name already exists
+    cursor.execute("SELECT id FROM Characters WHERE name = ?", (char_name,))
+    existing_character = cursor.fetchone()
     
-    conn.commit()
+    if existing_character:
+        print(f"Error: A character with the name '{char_name}' already exists.")
+    else:
+        # Insert the new character if the name is unique
+        cursor.execute("INSERT INTO Characters (name, race, class, background, level) VALUES (?, ?, ?, ?, ?)",
+                       (char_name, char_race, char_class, char_background, char_level))
+        conn.commit()
+        print(f"Character '{char_name}' added successfully.")
+
+    conn.close()
 
 # Example usage
-#add_character("Gandalf", "Wizard", 20)
+#add_character("Gandalf", "Elf", "Wizard", "Acolyte", 20)
 
 def get_characters():
     conn = sqlite3.connect("DnD_Database.db")
