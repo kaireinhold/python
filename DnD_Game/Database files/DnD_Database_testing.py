@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd
 import os
+import pprint
 
 #if os.path.exists("DnD_Database.db"):
 #    os.remove("DnD_Database.db")
@@ -73,6 +74,67 @@ conn.commit()
 cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
 tables = cursor.fetchall()
 
-print("Tables in database:", tables)
+print("Tables in database:")
+pprint.pprint(tables)
+
+
+def add_character(name, char_class, level):
+    conn = sqlite3.connect("DnD_Database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("INSERT INTO Characters (name, class, level) VALUES (?, ?, ?)",
+                   (name, char_class, level))
+    
+    conn.commit()
+
+# Example usage
+#add_character("Gandalf", "Wizard", 20)
+
+def get_characters():
+    conn = sqlite3.connect("DnD_Database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM Characters")
+    rows = cursor.fetchall()
+    
+    for row in rows:
+        pprint.pprint(row)
+
+# Example usage
+#get_characters()
+
+
+def update_character_level(name, new_level):
+    conn = sqlite3.connect("DnD_Database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("UPDATE Characters SET level = ? WHERE name = ?", (new_level, name))
+    
+    conn.commit()
+    
+# Example usage
+#update_character_level("Gandalf", 25)
+
+def delete_character(name):
+    conn = sqlite3.connect("DnD_Database.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("DELETE FROM Characters WHERE name = ?", (name,))
+    
+    conn.commit()
+
+# Example usage
+#delete_character("Luna")
+
+
+def get_characters_df():
+    conn = sqlite3.connect("DnD_Database.db")
+    df = pd.read_sql_query("SELECT * FROM Characters", conn)
+
+    return df
+
+# Example usage
+#pprint.pprint(get_characters_df())
+
 
 conn.close()

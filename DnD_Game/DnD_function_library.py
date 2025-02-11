@@ -494,9 +494,17 @@ class Dnd:
 
         return self.hp_max  # Return the final calculated max HP
 
-    def skill_proficiency(self, char_class=None, char_race=None):
-        pass
     def background(self, char_class=None, char_race=None):
         pass
+    def skill_proficiency(self, char_class=None, char_race=None):
+        pass
     def give_equipment(self,):
+        pass
+    def remove_equipment(self,):
+        pass
+    def armor_class_calc(self, u_armor, u_race):
+        pass
+    def spells(self, u_background, u_class, u_race):
+        pass
+    def level_up(self,):
         pass
