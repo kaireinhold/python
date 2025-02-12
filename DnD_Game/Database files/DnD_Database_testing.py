@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 import os
 import pprint
+import sys
 
 #if os.path.exists("DnD_Database.db"):
 #    os.remove("DnD_Database.db")
@@ -145,6 +146,5 @@ def get_characters_df():
 
 # Example usage
 #pprint.pprint(get_characters_df())
-
 
 conn.close()
