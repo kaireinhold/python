@@ -21,7 +21,7 @@ while True:
 """)
         dice_to_roll = input("What type of dice would you like to roll for this game? (ex: d100, d20, d6) ")
         if version == "2":
-            duplicates = input("How many duplicates do you want to allow? (Greater than 1) ")
+            duplicates = input("How many duplicates do you want to allow? ")
         player_1 = int(input("How many rolls do you think there will be, Player 1? "))
         player_2 = int(input("How many rolls do you think there will be, Player 2? "))
         play = True
