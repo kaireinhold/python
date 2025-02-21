@@ -80,15 +80,15 @@ while True:
                         print(f"Congratulations, Player 2! You were within 10 of the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {len(dice.rolls)}!")
                         print(dice.rolls)
                     elif math.isclose(player_1, len(dice.rolls), abs_tol = 10) == True and math.isclose(player_2, len(dice.rolls), abs_tol = 10) == True:
-                        print(f"Congratulations! You were both within 10 of the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {dice.len(rolls)}!")
+                        print(f"Congratulations! You were both within 10 of the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {len(dice.rolls)}!")
                         print(dice.rolls)
                     else:
                         if abs(player_1 - len(dice.rolls)) < abs(player_2 - len(dice.rolls)):
                             print(f"Congratulations, Player 1! You were closer to the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {len(dice.rolls)}!")
-                            print(rolls)
+                            print(dice.rolls)
                         elif abs(player_2 - len(dice.rolls)) < abs(player_1 - len(dice.rolls)):
                             print(f"Congratulations, Player 2! You were closer to the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {len(dice.rolls)}!")
-                            print(rolls)
+                            print(dice.rolls)
                         elif abs(player_1 - len(dice.rolls)) == abs(player_2 - len(dice.rolls)):
                             print(f"Congratulations! You were both the same amount away from the answer! Player 1 guessed {player_1}, Player 2 guessed {player_2}, and the answer was {len(dice.rolls)}!")
                             print(dice.rolls)
