@@ -1,1 +1,1 @@
-This is a collection of all of my code files in the Python code language.
+This is a collection of my miscellaneous projects and code files in the Python code language.
